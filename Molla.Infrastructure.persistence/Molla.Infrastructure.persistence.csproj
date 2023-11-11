@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Molla.Domain\Molla.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="UnitOfWork\" />
+  </ItemGroup>
+
 </Project>
