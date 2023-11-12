@@ -1,12 +1,25 @@
-﻿using Molla.Domain.Common;
-using Molla.Domain.Enums;
+﻿
+using Microsoft.AspNetCore.Http;
 using Molla.Domain.ValueObjects;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Molla.Domain.Entities
+namespace Molla.Application.DTOs
 {
-    public class Slider:BaseEntity
+    public class SliderDTO
     {
+        [Key]
+        public Guid ID { get; set; }
+        [Display(Name = "Create date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
+        public DateTime CreateDate { get; set; }
+        [Display(Name = "Update date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
+        public DateTime UpdateDate { get; set; }
 
         public required string ImageSource { get; set; }
         [Display(Name = "Start slider")]
@@ -40,8 +53,9 @@ namespace Molla.Domain.Entities
 
         [Display(Name = "Link to")]
         [Required(ErrorMessage = "please enter {0}")]
-        [Url(ErrorMessage ="Enter valid URL")]
+        [Url(ErrorMessage = "Enter valid URL")]
         public string? Link { get; set; }
 
+        public IFormFile ImageFile { get; set; }
     }
 }

@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Molla.Domain.IRepositories;
+using Molla.Infrastructure.persistence.Common;
+using Molla.Infrastructure.persistence.Repositories;
+
 namespace Molla.Presentation
 {
     public class Program
@@ -9,15 +14,21 @@ namespace Molla.Presentation
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<ApplicationDbContext>(
+                x => x.UseSqlServer(
+                    builder.Configuration.GetConnectionString("DefualtConnection")
+                    ));
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+
+            // Configure the HTTP request pipeline
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
