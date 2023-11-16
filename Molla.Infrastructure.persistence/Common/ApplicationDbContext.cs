@@ -12,7 +12,7 @@ namespace Molla.Infrastructure.persistence.Common
             
         }
         public DbSet<Slider> Sliders { get; set; }
-
+        public DbSet<Baner> Baners { get; set; }
 
 
     }
