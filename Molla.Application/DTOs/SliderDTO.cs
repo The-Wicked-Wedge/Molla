@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using Molla.Domain.Enums;
 using Molla.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -49,12 +50,14 @@ namespace Molla.Application.DTOs
 
         [Display(Name = "Tags")]
         [Required(ErrorMessage = "please enter {0}")]
-        public required string Tag { get; set; }
+        public string Tag { get; set; }
 
         [Display(Name = "Link to")]
         [Required(ErrorMessage = "please enter {0}")]
         [Url(ErrorMessage = "Enter valid URL")]
         public string? Link { get; set; }
+        [Display(Name = "Events")]
+        public ProductEvents? Events { get; set; }
 
         public IFormFile ImageFile { get; set; }
     }
