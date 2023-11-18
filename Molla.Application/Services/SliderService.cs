@@ -1,6 +1,7 @@
-﻿using Molla.Application.DTOs;
+﻿using Microsoft.AspNetCore.Http;
+using Molla.Application.DTOs;
+using Molla.Application.Extensions;
 using Molla.Application.IServices;
-using Molla.Application.Mapper;
 using Molla.Domain.Entities;
 using Molla.Domain.IRepositories;
 using System;
@@ -20,11 +21,14 @@ namespace Molla.Application.Services
         }
         public async Task<bool> CreateAsync(SliderDTO model)
         {
+            var imageName =  Guid.NewGuid().ToString() + Path.GetExtension(model.ImageSource);
+
+            model.ImageFile.AddImageToServer(imageName,model.ImageSource,270,270);
             Slider reverseDTO = model.ReverseDTO();
             bool result = await _sliderRepository.CreateAsync(reverseDTO);
+
             return result; 
         }
-
         public async Task<bool> DeleteByIDAsync(Guid id)
         {
             bool result = await _sliderRepository.DeleteByIDAsync(id);
@@ -44,6 +48,13 @@ namespace Molla.Application.Services
             SliderDTO res = x.ConvertToDTO();
             return res;
         }
+
+        public async Task<bool> IsAnyActiveSlider()
+        {
+            bool x = await _sliderRepository.IsAnyActiveSlider();
+            return x;
+        }
+
         public async Task<bool> UpdateByIDAsync(SliderDTO model)
         {
             Slider reverseDTO = model.ReverseDTO();

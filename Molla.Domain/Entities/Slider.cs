@@ -36,12 +36,12 @@ namespace Molla.Domain.Entities
 
         [Display(Name = "Tags")]
         [Required(ErrorMessage = "please enter {0}")]
-        public required string Tag { get; set; }
+        public string Tag { get; set; }
 
         [Display(Name = "Link to")]
-        [Required(ErrorMessage = "please enter {0}")]
         [Url(ErrorMessage ="Enter valid URL")]
         public string? Link { get; set; }
-
+        [Display(Name = "Events")]
+        public ProductEvents? Events { get; set; }
     }
 }
