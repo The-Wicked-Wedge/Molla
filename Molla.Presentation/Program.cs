@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+ 
+using Molla.Domain.Common;
+ 
 using Molla.Application.IServices;
 using Molla.Application.Services;
+ 
 using Molla.Domain.IRepositories;
 using Molla.Infrastructure.persistence.Common;
 using Molla.Infrastructure.persistence.Repositories;
@@ -16,15 +20,31 @@ namespace Molla.Presentation
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+
+            #region Configs
+            
+            
+            //DataBase
             builder.Services.AddDbContext<ApplicationDbContext>(
                 x => x.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefualtConnection")
                     ));
+ 
+
+
+            //Cloudinary 
+            builder.Services.Configure<CloudinarySetup>(builder.Configuration.GetSection("CloudinarySetup"));
+
+
+
+            #endregion
+ 
             /* register services */
             builder.Services.AddScoped<ISliderService, SliderService>();
 
             /* register repository */
             builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+ 
 
             var app = builder.Build();
 
