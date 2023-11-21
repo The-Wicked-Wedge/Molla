@@ -8,8 +8,8 @@ namespace Molla.Domain.Common
 {
     public class CloudinarySetup
     {
-        public string CloudName { get; set; } = "cloud name value must be replaced here";
-        public string ApiKey { get; set; } = "api key value must be replaced here";
-        public string ApiSecret { get; set; } = "api secret value must be replaced here";
+        public string CloudName { get; set; } = "drcwhtau8";
+        public string ApiKey { get; set; } = "145155234659725";
+        public string ApiSecret { get; set; } = "5Brb74vpGgpMunxnHXODUbb1Wc8";
     }
 }
