@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Molla.Application.Mapper
+namespace Molla.Application.Extensions
 {
     public static class CustomMapper
     {
@@ -24,9 +24,10 @@ namespace Molla.Application.Mapper
                 IsActive = model.IsActive,
                 Link = model.Link,
                 StartDate = model.StartDate,
+                Events = model.Events
             };
         }
-        public static Slider ReverseDTO(this SliderDTO model) 
+        public static Slider ReverseDTO(this SliderDTO model)
         {
             return new Slider
             {
@@ -41,6 +42,7 @@ namespace Molla.Application.Mapper
                 Link = model.Link,
                 StartDate = model.StartDate,
                 UpdateDate = model.UpdateDate,
+                Events = model.Events
             };
         }
 
