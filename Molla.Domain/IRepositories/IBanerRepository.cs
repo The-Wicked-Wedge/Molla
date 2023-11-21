@@ -9,6 +9,7 @@ namespace Molla.Domain.IRepositories
 {
     public interface IBanerRepository : IDisposable
     {
+
         Task<IEnumerable<Baner>> GetAllAsync();
         Task<Baner> GetByIdAsync(Guid id);
         Task<bool> CreateAsync(Baner baner);
