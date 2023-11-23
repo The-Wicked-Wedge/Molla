@@ -15,7 +15,7 @@ namespace Molla.Domain.IRepositories
         Task<bool> CreateAsync(Baner baner);
         Task<bool> SaveAsync();
         bool Save();
-        Task<bool> UpdateByIdAsync(Baner baner);
+        Task<bool> UpdateAsync(Baner baner);
         Task<bool> DeleteByIdAsync(Guid id);
         
     }

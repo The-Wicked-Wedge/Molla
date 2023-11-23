@@ -54,7 +54,7 @@ namespace Molla.Infrastructure.persistence.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> UpdateByIdAsync(Baner baner)
+        public async Task<bool> UpdateAsync(Baner baner)
         {
             _context.Update(baner);
             return await SaveAsync();
