@@ -45,6 +45,13 @@ namespace Molla.Application.Extensions
                 Events = model.Events
             };
         }
+        public static Baner ConvertBanerToBanerDTO(this Baner baner)
+        {
+            return new Baner
+            {
+                ID = baner.
+            };
+        }
 
     }
 }
