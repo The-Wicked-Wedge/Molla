@@ -45,11 +45,32 @@ namespace Molla.Application.Extensions
                 Events = model.Events
             };
         }
-        public static Baner ConvertBanerToBanerDTO(this Baner baner)
+        public static BanerDTO ConvertBanerToBanerDTO(this Baner baner)
+        {
+            return new BanerDTO
+            {
+                ID = baner.ID,
+                BanerDescription = baner.BanerDescription,
+                CreateDate = baner.CreateDate,
+                EndDate = baner.EndDate,
+                ImageSource = baner.ImageSource,
+                StartDate = baner.StartDate,
+                Title = baner.Title,
+                UpdateDate = (DateTime)baner.UpdateDate
+            };
+        }
+        public static Baner ConvertBanerDTOToBaner(this BanerDTO baner)
         {
             return new Baner
             {
-                ID = baner.
+                ID = baner.ID,
+                BanerDescription = baner.BanerDescription,
+                CreateDate = baner.CreateDate,
+                EndDate = baner.EndDate,
+                ImageSource = baner.ImageSource,
+                StartDate = baner.StartDate,
+                Title = baner.Title,
+                UpdateDate = baner.UpdateDate
             };
         }
 
