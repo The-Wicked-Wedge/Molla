@@ -1,6 +1,8 @@
 ﻿using Molla.Application.DTOs;
+using Molla.Application.Extensions;
 using Molla.Application.IServices;
 using Molla.Domain.IRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,27 +22,28 @@ namespace Molla.Application.Services
 
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
-            return await banerRepository.CreateAsync()
+            return await banerRepository.CreateAsync(banerDTO.ConvertBanerDTOToBaner());
         }
 
-        public Task<bool> DeleteByIdAsync(Guid id)
+        public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await banerRepository.DeleteByIdAsync(id);
         }
 
-        public Task<IEnumerable<BanerDTO>> GetAllAsync()
+        public async Task<IEnumerable<BanerDTO>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return (await banerRepository.GetAllAsync()).Select(b => b.ConvertBanerToBanerDTO());
+            
         }
 
-        public Task<BanerDTO> GetByIdAsync(Guid id)
+        public async Task<BanerDTO> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return (await banerRepository.GetByIdAsync(id)).ConvertBanerToBanerDTO();
         }
 
-        public Task<bool> UpdateByIdAsync(BanerDTO BanerDTO)
+        public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
-            throw new NotImplementedException();
+            return await banerRepository.UpdateAsync(BanerDTO.ConvertBanerDTOToBaner());
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Molla.Application.IServices
         Task<IEnumerable<BanerDTO>> GetAllAsync();
         Task<BanerDTO> GetByIdAsync(Guid id);
         Task<bool> CreateAsync(BanerDTO banerDTO);
-        Task<bool> UpdateByIdAsync(BanerDTO BanerDTO);
+        Task<bool> UpdateAsync(BanerDTO BanerDTO);
         Task<bool> DeleteByIdAsync(Guid id);
     }
 }
