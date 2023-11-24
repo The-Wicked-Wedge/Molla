@@ -29,22 +29,25 @@ namespace Molla.Presentation
                 x => x.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefualtConnection")
                     ));
- 
-
-
             //Cloudinary 
             builder.Services.Configure<CloudinarySetup>(builder.Configuration.GetSection("CloudinarySetup"));
 
 
 
             #endregion
- 
-            /* register services */
-            builder.Services.AddScoped<ISliderService, SliderService>();
 
-            /* register repository */
+           
+            #region Services
+            builder.Services.AddScoped<ISliderService, SliderService>();
+            builder.Services.AddScoped<IPhotoService, PhotoService>();
+            #endregion
+
+
+            #region Repositories
             builder.Services.AddScoped<ISliderRepository, SliderRepository>();
- 
+            #endregion
+
+
 
             var app = builder.Build();
 
