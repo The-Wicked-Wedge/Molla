@@ -8,7 +8,7 @@ namespace Molla.Domain.Entities
     public class Slider:BaseEntity
     {
 
-        public required string ImageSource { get; set; }
+        public required string ImageSource { get; set; } = "";
         [Display(Name = "Start slider")]
         [Required(ErrorMessage = "please enter {0}")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]
