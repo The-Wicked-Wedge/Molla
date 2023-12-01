@@ -34,5 +34,6 @@ namespace Molla.Application.DTOs
 
         [Display(Name = "Description")]
         public string? BanerDescription { get; set; }
+        public string? Error { get; set; }
     }
 }
