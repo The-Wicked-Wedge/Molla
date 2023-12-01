@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Molla.Application.DTOs
 
         [Display(Name = "Description")]
         public string? BanerDescription { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string? Error { get; set; }
     }
 }

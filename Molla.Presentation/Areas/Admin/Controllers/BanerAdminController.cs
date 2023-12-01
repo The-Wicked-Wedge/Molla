@@ -7,10 +7,13 @@ namespace Molla.Presentation.Areas.Admin.Controllers
     public class BanerAdminController : Controller
     {
         private readonly IBanerService banerService;
+        private readonly IPhotoService photoService;
 
-        public BanerAdminController(IBanerService banerService)
+        public BanerAdminController(IBanerService banerService,
+                                    IPhotoService photoService)
         {
             this.banerService = banerService;
+            this.photoService = photoService;
         }
 
         [Route("/Admin/Baner")]
@@ -43,6 +46,15 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                     baner.Error = "ModelState Is Not Valid";
                     return View(baner);
                 }
+                if(baner.ImageFile == null)
+                {
+                    baner.Error = "Select An Image First";
+                    return View(baner);
+                }
+
+                var upload = await photoService.AddPhotoAsync(baner.ImageFile);
+                baner.ImageSource = upload.Url.ToString();
+
                 await banerService.CreateAsync(baner);
 
                 return RedirectToAction("Index", "Home");
@@ -92,6 +104,12 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                     baner.Error = "ModelState Is Not Valid";
                     return View(baner);
                 }
+                if(baner.ImageFile != null)
+                {
+                    var upload = await photoService.AddPhotoAsync(baner.ImageFile);
+                    baner.ImageSource = upload.Url.ToString();
+                }
+
 
                 await banerService.UpdateAsync(baner);
 
