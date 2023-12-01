@@ -2,12 +2,7 @@
 using Molla.Application.Extensions;
 using Molla.Application.IServices;
 using Molla.Domain.IRepositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Molla.Application.Services
 {
@@ -22,6 +17,8 @@ namespace Molla.Application.Services
 
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
+            banerDTO.CreateDate = DateTime.Now;
+
             return await banerRepository.CreateAsync(banerDTO.ConvertBanerDTOToBaner());
         }
 
@@ -43,6 +40,8 @@ namespace Molla.Application.Services
 
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
+            BanerDTO.UpdateDate = DateTime.Now;
+
             return await banerRepository.UpdateAsync(BanerDTO.ConvertBanerDTOToBaner());
         }
     }
