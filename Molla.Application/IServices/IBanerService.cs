@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Molla.Application.IServices
 {
-    internal interface IBanerService
+    public interface IBanerService
     {
         Task<IEnumerable<BanerDTO>> GetAllAsync();
         Task<BanerDTO> GetByIdAsync(Guid id);
