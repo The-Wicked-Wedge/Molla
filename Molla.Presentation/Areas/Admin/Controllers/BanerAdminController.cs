@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using Molla.Application.DTOs;
 using Molla.Application.IServices;
 
@@ -48,7 +49,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 if(baner.ImageFile == null)
                 {
-                    return Json("Select An Image First");
+                    return Json("Error : Select An Image First");
                 }
 
                 var upload = await photoService.AddPhotoAsync(baner.ImageFile);
@@ -72,19 +73,15 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [Route("/Admin/Baner/Edit")]
         public async Task<IActionResult> Edit(Guid Id)
         {
-
             try
             {
                 var baner = await banerService.GetByIdAsync(Id);
 
                 if(baner == null)
                 {
-                    return Json("Nothing Exist With Requested Id");
+                    return RedirectToAction("Index");
                 }
-
                 return View(baner);
-
-
             }
             catch(Exception ex)
             {
