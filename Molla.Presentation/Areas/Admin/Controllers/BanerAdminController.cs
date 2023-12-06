@@ -43,13 +43,12 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    baner.Error = "ModelState Is Not Valid";
-                    return View(baner);
+                    return Json("Error : ModelState Is Not Valid");
                 }
+
                 if(baner.ImageFile == null)
                 {
-                    baner.Error = "Select An Image First";
-                    return View(baner);
+                    return Json("Select An Image First");
                 }
 
                 var upload = await photoService.AddPhotoAsync(baner.ImageFile);
@@ -64,7 +63,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 baner.Error = ex.Message;
 
-                return View(baner);
+                return Json("Error : "+ ex.Message);
             
             }
         }
@@ -80,7 +79,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 if(baner == null)
                 {
-                    return NotFound(StatusCodes.Status404NotFound);
+                    return Json("Nothing Exist With Requested Id");
                 }
 
                 return View(baner);
@@ -89,7 +88,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             }
             catch(Exception ex)
             {
-                return NotFound(StatusCodes.Status500InternalServerError);
+                return Json("Error : " + ex.Message);
             }
         }
 
@@ -101,8 +100,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    baner.Error = "ModelState Is Not Valid";
-                    return View(baner);
+                    return Json("Error : Model State Is Not Valid");
                 }
                 if(baner.ImageFile != null)
                 {
@@ -116,8 +114,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Home");
             }catch(Exception ex)
             {
-                baner.Error = ex.Message;
-                return View(baner);
+                return Json("Error : " + ex);
             }
         }
 
@@ -131,7 +128,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                 return Json(true);
             }catch(Exception ex)
             {
-                return Json(ex.Message);
+                return Json("Error : "+ex.Message);
             }
         }
 

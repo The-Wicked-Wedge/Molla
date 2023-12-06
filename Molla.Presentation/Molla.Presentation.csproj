@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Molla.Infrastructure\Molla.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\CustomJsFiles\AdminBaner\" />
+  </ItemGroup>
+
 </Project>

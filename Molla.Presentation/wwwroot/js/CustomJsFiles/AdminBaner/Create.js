@@ -1,0 +1,38 @@
+$("#createsubmit").click = function () {
+
+    const Url = $("form").attr("action");
+
+    $.ajax({
+        url: Url,
+        method: 'POST',
+        body: new FormData($("form")[0]),
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function (json) {
+            if (!json.includes("Error")) {
+                sweetAlert({
+                    title: "Done",
+                    text: "Baner Created Successfuly",
+                    type: "success",
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Return To Index",
+                    cancelButtonText: "Add One More"
+                }).then(async function (result) {
+                    if (result.dismiss != 'cancel') {
+                        const indexUrl = '/Admin/Baner'; 
+                        const response = await fetch(indexUrl, {
+                            method: 'GET'
+                        });
+                    } else {
+                        document.location.reload();
+                    }
+                });
+
+            }
+        }
+    });
+}
+
