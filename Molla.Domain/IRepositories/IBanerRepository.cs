@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Molla.Domain.IRepositories
 {
-    public interface IBanerRepository : IDisposable
+    public interface IBanerRepository
     {
 
         Task<IEnumerable<Baner>> GetAllAsync();
         Task<Baner> GetByIdAsync(Guid id);
         Task<bool> CreateAsync(Baner baner);
-        Task<bool> SaveAsync();
-        bool Save();
         Task<bool> UpdateAsync(Baner baner);
         Task<bool> DeleteByIdAsync(Guid id);
         

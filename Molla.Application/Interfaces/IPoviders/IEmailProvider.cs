@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Molla.Infrastructure.EmailProvider
+namespace Molla.Application.Interfaces.IPoviders
 {
     public interface IEmailProvider
     {
         Task<bool> SendEmail(EmailDTO model);
-        Task<bool> SendRegistrationCodeByEmail();
+        Task<bool> SendRegistrationCodeByEmail(string Id);
     }
 }
