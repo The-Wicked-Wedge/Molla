@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Molla.Domain.IRepositories
 {
-    public interface ISliderRepository:IDisposable
+    public interface ISliderRepository
     {
         Task<IEnumerable<Slider>> GetAllAsync();
         Task<Slider> GetByIDAsync(Guid id);
@@ -15,6 +15,5 @@ namespace Molla.Domain.IRepositories
         Task<bool> CreateAsync(Slider model);
         Task<bool> UpdateByIDAsync(Slider model);
         Task<bool> DeleteByIDAsync(Guid id);
-        Task Save();
     }
 }

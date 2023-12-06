@@ -1,6 +1,7 @@
 ﻿using Molla.Domain.Common;
 using Molla.Domain.Enums;
 using Molla.Domain.ValueObjects;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Molla.Domain.Entities

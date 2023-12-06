@@ -1,27 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using Molla.Application.DTOs;
+﻿using Molla.Application.DTOs;
 using Molla.Application.Extensions;
 using Molla.Application.IServices;
 using Molla.Domain.Entities;
 using Molla.Domain.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Molla.Application.Services
 {
-    public class SliderService : ISliderService
+    public class SliderService(
+        ISliderRepository sliderRepository, 
+        IPhotoService photoService) : ISliderService
     {
-        private readonly IPhotoService _photoService;
-        private readonly ISliderRepository _sliderRepository;
-        public SliderService(ISliderRepository sliderRepository, IPhotoService photoService)
-        {
-            this._sliderRepository = sliderRepository;
-            this._photoService = photoService;
-        }
+        private readonly ISliderRepository _sliderRepository = sliderRepository;
+        private readonly IPhotoService _photoService = photoService;
         public async Task<bool> CreateAsync(SliderDTO model)
         {
 

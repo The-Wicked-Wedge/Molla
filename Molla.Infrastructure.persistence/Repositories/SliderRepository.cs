@@ -8,16 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Molla.Application.Interfaces;
+using Molla.Infrastructure.persistence.UnitOfWork;
 
 namespace Molla.Infrastructure.persistence.Repositories
 {
-    public class SliderRepository : ISliderRepository
+    public class SliderRepository(ApplicationDbContext context, ApplicationUnitOfWork uow) : ISliderRepository
     {
-        private readonly ApplicationDbContext _context;
-        public SliderRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly IApplicationUnitOfWork _uow = uow;
+        private readonly ApplicationDbContext _context = context;
 
         public async Task<IEnumerable<Slider>> GetAllAsync()
         {
@@ -61,12 +60,12 @@ namespace Molla.Infrastructure.persistence.Repositories
                         {
                             NewSlider.IsActive = false;
                             await _context.Sliders.AddAsync(NewSlider);
-                            await Save();
+                            await _uow.SaveChangesAsync();
                         }
                         else
                         {
                             await _context.Sliders.AddAsync(NewSlider);
-                            await Save();
+                            await _uow.SaveChangesAsync();
                         }
                         return true;
                     }
@@ -88,7 +87,7 @@ namespace Molla.Infrastructure.persistence.Repositories
             if (sliderById != null)
             {
                 _context.Sliders.Remove(sliderById);
-                await Save();
+                await _uow.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -115,18 +114,11 @@ namespace Molla.Infrastructure.persistence.Repositories
                 getSliderById.UpdateDate = DateTime.Now;
                 getSliderById.Events = model.Events;
 
-                await Save();
+                await _uow.SaveChangesAsync();
                 return true;
             }
             return false;
         }
-        public async Task Save()
-        {
-            await _context.SaveChangesAsync();
-        }
-        public void Dispose()
-        {
-            _context.DisposeAsync();
-        }
+
     }
 }

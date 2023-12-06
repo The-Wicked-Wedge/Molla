@@ -1,28 +1,22 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Infrastructure.persistence.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Molla.Application.Interfaces.IPoviders;
 
 namespace Molla.Infrastructure.EmailProvider
 {
-    public class EmailProvider : IEmailProvider
+    public class EmailProvider(ApplicationDbContext context, UserManager<IdentityUser> userManager) : IEmailProvider
     {
-        private readonly ApplicationDbContext _context;
-        public EmailProvider(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly UserManager<IdentityUser> _userManager = userManager;
+        private readonly ApplicationDbContext _context = context;
         public async Task<bool> SendEmail(EmailDTO model)
         {
             MailAddress sender = new MailAddress("Molla.Sneakers@gmail.com");
             MailAddress receiver = new MailAddress(model.Reciever, "Receiver");
-            string password = "9092301030";
+            string password = "dksw dvol zval hrls";
             string sub = model.Subject;
             string body = model.Body + $"\n{DateTime.Now}\n your account activated";
 /*            Attachment attachment;
@@ -44,7 +38,7 @@ namespace Molla.Infrastructure.EmailProvider
             {
                 try
                 {
-                    smtp.Send(mess);
+                    await smtp.SendMailAsync(mess);
                     return true;
                 }
                 catch (Exception)
@@ -54,9 +48,29 @@ namespace Molla.Infrastructure.EmailProvider
             }
         }
 
-        public Task<bool> SendRegistrationCodeByEmail()
+        public async Task<bool> SendRegistrationCodeByEmail(string Id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == Id);
+
+            Random rnd = new Random();
+            int x = rnd.Next(999, 9999);
+/*            user.RCode = x;*/
+            await _context.SaveChangesAsync();
+            var email = new EmailDTO()
+            {
+                Reciever = user.Email,
+                Subject = "Verification Code",
+                Body = "The Verification Code Is  : " + x.ToString()
+            };
+            try
+            {
+                await SendEmail(email);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

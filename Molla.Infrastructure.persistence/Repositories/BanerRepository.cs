@@ -4,34 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Molla.Application.Interfaces;
 using Molla.Domain.Entities;
 using Molla.Domain.IRepositories;
 using Molla.Infrastructure.persistence.Common;
 
 namespace Molla.Infrastructure.persistence.Repositories
 {
-    public class BanerRepository : IBanerRepository
+    public class BanerRepository(ApplicationDbContext context, IApplicationUnitOfWork uow) : IBanerRepository
     {
-        private readonly ApplicationDbContext _context;
-        public BanerRepository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
+        private readonly IApplicationUnitOfWork _uow = uow;
+
         public async Task<bool> CreateAsync(Baner baner)
         {
             await _context.AddAsync(baner);
-            return await SaveAsync();
+            return await _uow.SaveChangesAsync();
         }
 
         public async Task<bool> DeleteByIdAsync(Guid id)
         {
             _context.Remove(await GetByIdAsync(id));
-            return await SaveAsync();
-        }
-
-        public void Dispose()
-        {
-            _context.DisposeAsync();
+            return await _uow.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Baner>> GetAllAsync()
@@ -44,20 +38,11 @@ namespace Molla.Infrastructure.persistence.Repositories
             return await _context.Baners.FirstOrDefaultAsync(b => b.ID == id);
         }
 
-        public bool Save()
-        {
-            return _context.SaveChanges() > 0;
-        }
-
-        public async Task<bool> SaveAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
 
         public async Task<bool> UpdateAsync(Baner baner)
         {
             _context.Update(baner);
-            return await SaveAsync();
+            return await _uow.SaveChangesAsync();
         }
     }
 }
