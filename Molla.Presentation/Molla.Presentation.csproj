@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\CustomJsFiles\AdminBaner\" />
+    <Folder Include="wwwroot\js\CustomJsFiles\AdminSlider\" />
   </ItemGroup>
 
   <ItemGroup>

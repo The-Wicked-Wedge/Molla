@@ -4,5 +4,17 @@
     "inputFiles": [
       "wwwroot/js/CustomJsFiles/AdminBaner/Create.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CustomJsFiles/AdminBaner/Edit.min.js",
+    "inputFiles": [
+      "wwwroot/js/CustomJsFiles/AdminBaner/Edit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CustomJsFiles/AdminSlider/Create.min.js",
+    "inputFiles": [
+      "wwwroot/js/CustomJsFiles/AdminSlider/Create.js"
+    ]
   }
 ]

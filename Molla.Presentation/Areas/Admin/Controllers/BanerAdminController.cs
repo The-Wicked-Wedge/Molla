@@ -57,7 +57,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 await banerService.CreateAsync(baner);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "BanerAdmin");
             }
             catch(Exception ex)
             {
@@ -108,7 +108,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 await banerService.UpdateAsync(baner);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "BanerAdmin");
             }catch(Exception ex)
             {
                 return Json("Error : " + ex);

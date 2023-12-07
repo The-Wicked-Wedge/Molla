@@ -29,8 +29,21 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SliderDTO model)
         {
-            await _sliderService.CreateAsync(model);
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json("Error : " + "Model State Is Not Valid");
+                }
+
+                await _sliderService.CreateAsync(model);
+                return RedirectToAction("Index", "SliderAdmin");
+
+            }
+            catch (Exception ex)
+            {
+                return Json("Error : " + ex.Message);
+            }
         }
         [Route("/Admin/Slider/Edit")]
         [HttpGet]
@@ -43,8 +56,20 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(SliderDTO model)
         {
-            await _sliderService.UpdateByIDAsync(model);
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Json("Error : " +"Model State Is Not Valid");
+                }
+                await _sliderService.UpdateByIDAsync(model);
+
+                return RedirectToAction("Index","SliderAdmin");
+            }
+            catch (Exception ex)
+            {
+                return Json("Error : " + ex.Message);
+            }
         }
         [Route("/Admin/Slider/Delete")]
         [HttpGet]

@@ -14,7 +14,7 @@ $("#createsubmit").click = function () {
             if (!json.includes("Error")) {
                 sweetAlert({
                     title: "Done",
-                    text: "Baner Created Successfuly",
+                    text: "Slider Created Successfuly",
                     type: "success",
                     showConfirmButton: true,
                     showCancelButton: true,
@@ -22,7 +22,8 @@ $("#createsubmit").click = function () {
                     cancelButtonText: "Add One More"
                 }).then(async function (result) {
                     if (result.dismiss != 'cancel') {
-                        const indexUrl = '/Admin/Baner';
+                        const indexUrl = '/Admin/Slider';
+
                         window.location.replace(indexUrl);
                     } else {
                         window.location.reload();
@@ -33,11 +34,10 @@ $("#createsubmit").click = function () {
                 sweetAlert({
                     title: "Error",
                     text: json,
-                    type:"error"
+                    type: "error"
                 })
                 window.location.reload();
             }
         }
     });
 }
-

@@ -15,7 +15,8 @@ $("editsubmit").click = function () {
                 sweetAlert({
                     title: "Done",
                     text: "Baner Edited Successfuly",
-                    type: "success"
+                    type: "success",
+                    timer:4000
                 })
             } else {
                 sweetAlert({
