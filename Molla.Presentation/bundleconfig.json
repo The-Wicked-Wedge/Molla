@@ -16,5 +16,11 @@
     "inputFiles": [
       "wwwroot/js/CustomJsFiles/AdminSlider/Create.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CustomJsFiles/AdminSlider/Edit.min.js",
+    "inputFiles": [
+      "wwwroot/js/CustomJsFiles/AdminSlider/Edit.js"
+    ]
   }
 ]

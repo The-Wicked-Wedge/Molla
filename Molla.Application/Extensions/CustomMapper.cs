@@ -1,8 +1,10 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Domain.Entities;
+using Molla.Domain.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -73,6 +75,25 @@ namespace Molla.Application.Extensions
                 UpdateDate = baner.UpdateDate
             };
         }
-
+        public static SocialLinkDTO ConvertToDTO(this SocialLink socialLink)
+        {
+            return new SocialLinkDTO()
+            {
+                Id = socialLink.Id,
+                Name = socialLink.Name,
+                Link = socialLink.Link,
+                IconSource = socialLink.IconSource
+            };
+        }
+        public static SocialLink ConvertToModel(this SocialLinkDTO socialLinkDTO)
+        {
+            return new SocialLink()
+            {
+                Id = socialLinkDTO.Id,
+                Name = socialLinkDTO.Name,
+                IconSource = socialLinkDTO.IconSource,
+                Link = socialLinkDTO.Link
+            };
+        }
     }
 }
