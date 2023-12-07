@@ -22,15 +22,22 @@ $("#createsubmit").click = function () {
                     cancelButtonText: "Add One More"
                 }).then(async function (result) {
                     if (result.dismiss != 'cancel') {
-                        const indexUrl = '/Admin/Baner'; 
+                        const indexUrl = '/Admin/Baner';
                         const response = await fetch(indexUrl, {
                             method: 'GET'
                         });
                     } else {
-                        document.location.reload();
+                        window.location.reload();
                     }
                 });
 
+            } else {
+                sweetAlert({
+                    title: "Error",
+                    text: json,
+                    type:"error"
+                })
+                window.location.reload();
             }
         }
     });
