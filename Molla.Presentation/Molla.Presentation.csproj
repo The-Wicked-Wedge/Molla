@@ -8,8 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+ 
+    <Compile Remove="Areas\Admin\Views\SocialLinkAdmin\Edit.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+ 
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.13" />
+ 
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -28,6 +39,16 @@
     <ProjectReference Include="..\Molla.Application\Molla.Application.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure.persistence\Molla.Infrastructure.persistence.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure\Molla.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\CustomJsFiles\AdminBaner\" />
+    <Folder Include="wwwroot\js\CustomJsFiles\AdminSlider\" />
+    <Folder Include="wwwroot\js\CustomJsFiles\AdminSoiclaLink\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
 </Project>

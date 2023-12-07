@@ -10,7 +10,11 @@ namespace Molla.Application.Services
         private readonly IBanerRepository _banerRepository = banerRepository;
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
-            return await _banerRepository.CreateAsync(banerDTO.ConvertBanerDTOToBaner());
+
+            banerDTO.CreateDate = DateTime.Now;
+
+            return await banerRepository.CreateAsync(banerDTO.ConvertBanerDTOToBaner());
+
         }
 
         public async Task<bool> DeleteByIdAsync(Guid id)
@@ -31,7 +35,11 @@ namespace Molla.Application.Services
 
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
-            return await _banerRepository.UpdateAsync(BanerDTO.ConvertBanerDTOToBaner());
+ 
+            BanerDTO.UpdateDate = DateTime.Now;
+
+            return await banerRepository.UpdateAsync(BanerDTO.ConvertBanerDTOToBaner());
+  
         }
     }
 }
