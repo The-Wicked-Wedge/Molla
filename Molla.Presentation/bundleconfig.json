@@ -22,5 +22,11 @@
     "inputFiles": [
       "wwwroot/js/CustomJsFiles/AdminSlider/Edit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CustomJsFiles/AdminSoiclaLink/Create.min.js",
+    "inputFiles": [
+      "wwwroot/js/CustomJsFiles/AdminSoiclaLink/Create.js"
+    ]
   }
 ]
