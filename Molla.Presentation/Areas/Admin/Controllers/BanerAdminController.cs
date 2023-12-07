@@ -5,6 +5,7 @@ using Molla.Application.IServices;
 
 namespace Molla.Presentation.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BanerAdminController : Controller
     {
         private readonly IBanerService banerService;
@@ -57,7 +58,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 await banerService.CreateAsync(baner);
 
-                return RedirectToAction("Index", "BanerAdmin");
+                return RedirectToAction("Index");
             }
             catch(Exception ex)
             {
@@ -108,7 +109,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 await banerService.UpdateAsync(baner);
 
-                return RedirectToAction("Index", "BanerAdmin");
+                return RedirectToAction("Index");
             }catch(Exception ex)
             {
                 return Json("Error : " + ex);
