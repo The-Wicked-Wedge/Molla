@@ -1,13 +1,16 @@
 using Microsoft.EntityFrameworkCore;
- 
 using Molla.Domain.Common;
- 
 using Molla.Application.IServices;
 using Molla.Application.Services;
- 
 using Molla.Domain.IRepositories;
 using Molla.Infrastructure.persistence.Common;
 using Molla.Infrastructure.persistence.Repositories;
+using Molla.Infrastructure.EmailProvider;
+using Microsoft.AspNetCore.Identity;
+using Molla.Domain.Entities;
+using Molla.Application.Interfaces.IPoviders;
+using Molla.Application.Interfaces;
+using Molla.Infrastructure.persistence.UnitOfWork;
 
 namespace Molla.Presentation
 {
@@ -19,17 +22,20 @@ namespace Molla.Presentation
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            
 
 
             #region Configs
-            
-            
+
+
             //DataBase
             builder.Services.AddDbContext<ApplicationDbContext>(
                 x => x.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DefualtConnection")
-                    ));
- 
+                    builder.Configuration.GetConnectionString("DefualtConnection")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>()
+                            .AddEntityFrameworkStores<ApplicationDbContext>()
+                            .AddDefaultTokenProviders();
 
 
             //Cloudinary 
@@ -38,13 +44,22 @@ namespace Molla.Presentation
 
 
             #endregion
- 
-            /* register services */
-            builder.Services.AddScoped<ISliderService, SliderService>();
 
-            /* register repository */
+           
+            #region Services
+            builder.Services.AddScoped<ISliderService, SliderService>();
+            builder.Services.AddScoped<IEmailProvider,EmailProvider>();
+            builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+            builder.Services.AddScoped<IPhotoService, PhotoService>();
+            builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
+            #endregion
+
+
+            #region Repositories
             builder.Services.AddScoped<ISliderRepository, SliderRepository>();
- 
+            #endregion
+
+
 
             var app = builder.Build();
 

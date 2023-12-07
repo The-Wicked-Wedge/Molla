@@ -59,6 +59,6 @@ namespace Molla.Application.DTOs
         [Display(Name = "Events")]
         public ProductEvents? Events { get; set; }
 
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

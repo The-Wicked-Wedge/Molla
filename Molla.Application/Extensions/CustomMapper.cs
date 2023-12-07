@@ -1,12 +1,6 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Domain.Entities;
-using Molla.Domain.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Molla.Application.Extensions
 {

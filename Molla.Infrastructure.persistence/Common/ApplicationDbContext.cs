@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
 using Molla.Domain.Entities;
 
 namespace Molla.Infrastructure.persistence.Common
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> option) : IdentityDbContext(option)
     {
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option)
             :base(option) 
         {
@@ -12,5 +15,6 @@ namespace Molla.Infrastructure.persistence.Common
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Baner> Baners { get; set; }
         public DbSet<SocialLink> SocialLinks { get; set; }
+
     }
 }
