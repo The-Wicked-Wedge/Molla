@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Molla.Application.DTOs;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces.IServices;
 
 namespace Molla.Presentation.Controllers
 {
-    public class UserAccountController(IUserAccountService userAccountService) : Controller
+    public class UserAccountController : Controller
     {
+        private readonly IUserAccountService _userAccountService;
+        public UserAccountController(IUserAccountService userAccountService)
+        {
+            _userAccountService = userAccountService;
+        }
         [Route("/Register")]
         [HttpGet]
         public IActionResult Index()
@@ -13,11 +18,11 @@ namespace Molla.Presentation.Controllers
 
             return View();
         }
-        [Route("/UserAccount")]
+        [Route("/UserAccount/Register")]
         [HttpPost]
         public async Task<IActionResult> Index(RegisterUserDTO model)
         {
-            await userAccountService.RegisterAsync(model);
+            await _userAccountService.RegisterAsync(model);
             return View();
         }
 
@@ -25,7 +30,7 @@ namespace Molla.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> SingInAccount(LoginUserDTO model)
         {
-            var x = await userAccountService.LoginAccountAsync(model);
+            var x = await _userAccountService.LoginAccountAsync(model);
             return View();
         }
     }

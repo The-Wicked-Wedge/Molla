@@ -1,6 +1,6 @@
 ﻿using Molla.Application.DTOs;
 
-namespace Molla.Application.IServices
+namespace Molla.Application.Interfaces.IServices
 {
     public interface ISliderService
     {

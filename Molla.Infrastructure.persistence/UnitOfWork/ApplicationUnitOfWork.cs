@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace Molla.Infrastructure.persistence.UnitOfWork
 {
-    public class ApplicationUnitOfWork(ApplicationDbContext dbContext) : IApplicationUnitOfWork
+    public class ApplicationUnitOfWork : IApplicationUnitOfWork
     {
-        private readonly ApplicationDbContext _dbContext = dbContext;
+        private readonly ApplicationDbContext _dbContext;
+        public ApplicationUnitOfWork(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public void Dispose()
         {

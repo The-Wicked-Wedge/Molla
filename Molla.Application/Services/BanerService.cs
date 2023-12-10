@@ -1,21 +1,50 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Application.Extensions;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces;
+using Molla.Application.Interfaces.IServices;
 using Molla.Domain.IRepositories;
 
 namespace Molla.Application.Services
 {
-    public class BanerService(IBanerRepository banerRepository) : IBanerService
+    public class BanerService : IBanerService
     {
-        private readonly IBanerRepository _banerRepository = banerRepository;
+        private readonly IBanerRepository _banerRepository;
+        private readonly IApplicationUnitOfWork _uow;
+        public BanerService(IBanerRepository banerRepository, IApplicationUnitOfWork uow)
+        {
+            _banerRepository = banerRepository;
+            _uow = uow;
+        }
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
-            return await _banerRepository.CreateAsync(banerDTO.ConvertBanerDTOToBaner());
+            var resualt = await _banerRepository.Create(banerDTO.ConvertBanerDTOToBaner());
+            if (resualt)
+            {
+                return await _uow.SaveChangesAsync();
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            return await _banerRepository.DeleteByIdAsync(id);
+            BanerDTO baner  = await  GetByIdAsync(id);
+            if(baner != null)
+            {
+                bool resualt = _banerRepository.Delete(baner.ConvertBanerDTOToBaner());
+                if (resualt)
+                {
+                    return await _uow.SaveChangesAsync();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+
         }
 
         public async Task<IEnumerable<BanerDTO>> GetAllAsync()
@@ -31,7 +60,17 @@ namespace Molla.Application.Services
 
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
-            return await _banerRepository.UpdateAsync(BanerDTO.ConvertBanerDTOToBaner());
+            BanerDTO baner = await GetByIdAsync(BanerDTO.ID);
+            if(baner != null)
+            {
+                bool resualt = _banerRepository.Update(BanerDTO.ConvertBanerDTOToBaner());
+                if (resualt)
+                {
+                    return await _uow.SaveChangesAsync();
+                }
+                return false;
+            }
+            return false;
         }
     }
 }

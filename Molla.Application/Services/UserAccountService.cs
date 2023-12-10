@@ -1,18 +1,28 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Molla.Application.DTOs;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces;
 using Molla.Application.Interfaces.IPoviders;
+using Molla.Application.Interfaces.IServices;
 
 namespace Molla.Application.Services
 {
-    public class UserAccountService(
-        UserManager<IdentityUser> userManager, 
-        IEmailProvider emailProvider, 
-        SignInManager<IdentityUser> signInManager) : IUserAccountService
+    public class UserAccountService: IUserAccountService
     {
-        private readonly UserManager<IdentityUser> _userManager = userManager;
-        private readonly IEmailProvider _emailProvider = emailProvider;
-        private readonly SignInManager<IdentityUser> _singInManager = signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IEmailProvider _emailProvider;
+        private readonly SignInManager<IdentityUser> _singInManager;
+        private readonly IApplicationUnitOfWork _uow;
+        public UserAccountService(
+            SignInManager<IdentityUser> singInManager, 
+            IEmailProvider emailProvider, 
+            UserManager<IdentityUser> userManager,
+            IApplicationUnitOfWork applicationUnitOfWork)
+        {
+            _emailProvider = emailProvider;
+            _singInManager = singInManager;
+            _userManager = userManager;
+            _uow = applicationUnitOfWork;
+        }
         public async Task<bool> RegisterAsync(RegisterUserDTO model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -31,7 +41,7 @@ namespace Molla.Application.Services
             if (createUser.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, "user");          
-                return true;
+                return await _uow.SaveChangesAsync();
             }
             return false;
         }

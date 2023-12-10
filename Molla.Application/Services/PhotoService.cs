@@ -2,7 +2,7 @@
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces.IServices;
 using Molla.Domain.Common;
 using System;
 using System.Collections.Generic;
@@ -17,12 +17,12 @@ namespace Molla.Application.Services
         private readonly Cloudinary _cloudinary;
         public PhotoService(IOptions<CloudinarySetup> config)
         {
-            var account = new Account(
+            var acc = new Account(
                 config.Value.CloudName,
                 config.Value.ApiKey,
                 config.Value.ApiSecret
                 );
-            _cloudinary = new Cloudinary(account);
+            _cloudinary = new Cloudinary(acc);
         }
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
         {

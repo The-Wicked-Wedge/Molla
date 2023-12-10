@@ -1,8 +1,7 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
- 
 
-namespace Molla.Application.IServices
+namespace Molla.Application.Interfaces.IServices
 {
     public interface IPhotoService
     {
