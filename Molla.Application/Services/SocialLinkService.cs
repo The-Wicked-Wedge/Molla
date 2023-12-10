@@ -1,6 +1,6 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Application.Extensions;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces.IServices;
 using Molla.Domain.IRepositories;
 using System;
 using System.Collections.Generic;

@@ -9,7 +9,7 @@ namespace Molla.Application.DTOs
 {
     public class SocialLinkDTO
     {
-        public int Id { get; set; }
+        public Guid ID { get; set; }
         [Required]
         [MaxLength(20)]
         public string Name { get; set; }
