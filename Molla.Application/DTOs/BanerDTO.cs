@@ -19,6 +19,7 @@ namespace Molla.Application.DTOs
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
         public DateTime UpdateDate { get; set; }
         public string ImageSource { get; set; }
+
         [Display(Name = "Start Date")]
         [Required(ErrorMessage = "Start Date Can't Be Null")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]

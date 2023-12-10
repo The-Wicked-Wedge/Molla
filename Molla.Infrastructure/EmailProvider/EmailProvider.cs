@@ -8,10 +8,15 @@ using Molla.Application.Interfaces.IPoviders;
 
 namespace Molla.Infrastructure.EmailProvider
 {
-    public class EmailProvider(ApplicationDbContext context, UserManager<IdentityUser> userManager) : IEmailProvider
+    public class EmailProvider : IEmailProvider
     {
-        private readonly UserManager<IdentityUser> _userManager = userManager;
-        private readonly ApplicationDbContext _context = context;
+        private readonly UserManager<IdentityUser> _userManager ;
+        private readonly ApplicationDbContext _context;
+        public EmailProvider(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
         public async Task<bool> SendEmail(EmailDTO model)
         {
             MailAddress sender = new MailAddress("Molla.Sneakers@gmail.com");

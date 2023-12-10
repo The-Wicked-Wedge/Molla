@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using Molla.Application.DTOs;
-using Molla.Application.IServices;
+using Molla.Application.Interfaces.IServices;
 
 namespace Molla.Presentation.Areas.Admin.Controllers
 {

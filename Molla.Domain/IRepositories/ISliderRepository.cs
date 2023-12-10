@@ -9,11 +9,14 @@ namespace Molla.Domain.IRepositories
 {
     public interface ISliderRepository
     {
-        Task<IEnumerable<Slider>> GetAllAsync();
         Task<Slider> GetByIDAsync(Guid id);
         Task<bool> IsAnyActiveSlider();
-        Task<bool> CreateAsync(Slider model);
-        Task<bool> UpdateByIDAsync(Slider model);
-        Task<bool> DeleteByIDAsync(Guid id);
+
+        #region Generice Repository
+        Task<IEnumerable<Slider>> GetAllAsync();
+        Task<bool> Create(Slider model);
+        bool Update(Slider model);
+        bool Delete(Slider model);
+        #endregion
     }
 }

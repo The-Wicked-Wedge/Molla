@@ -5,8 +5,9 @@ using Molla.Domain.Entities;
 
 namespace Molla.Infrastructure.persistence.Common
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> option) : IdentityDbContext(option)
+    public class ApplicationDbContext: IdentityDbContext
     {
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option)
             :base(option) 

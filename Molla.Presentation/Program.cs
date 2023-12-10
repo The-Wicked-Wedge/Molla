@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Molla.Domain.Common;
-using Molla.Application.IServices;
 using Molla.Application.Services;
 using Molla.Domain.IRepositories;
 using Molla.Infrastructure.persistence.Common;
@@ -11,6 +10,7 @@ using Molla.Domain.Entities;
 using Molla.Application.Interfaces.IPoviders;
 using Molla.Application.Interfaces;
 using Molla.Infrastructure.persistence.UnitOfWork;
+using Molla.Application.Interfaces.IServices;
 
 namespace Molla.Presentation
 {
@@ -47,7 +47,8 @@ namespace Molla.Presentation
 
            
             #region Services
-            builder.Services.AddScoped<ISliderService, SliderService>();
+            builder.Services.AddScoped<ISliderService,SliderService>();
+            builder.Services.AddScoped<IBanerService,BanerService>();
             builder.Services.AddScoped<IEmailProvider,EmailProvider>();
             builder.Services.AddScoped<IUserAccountService, UserAccountService>();
             builder.Services.AddScoped<IPhotoService, PhotoService>();
@@ -57,6 +58,7 @@ namespace Molla.Presentation
 
             #region Repositories
             builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+            builder.Services.AddScoped<IBanerRepository, BanerRepository>();
             #endregion
 
 
