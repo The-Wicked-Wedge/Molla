@@ -73,7 +73,7 @@ namespace Molla.Application.Extensions
         {
             return new SocialLinkDTO()
             {
-                Id = socialLink.Id,
+                ID = socialLink.ID,
                 Name = socialLink.Name,
                 Link = socialLink.Link,
                 IconSource = socialLink.IconSource
@@ -83,7 +83,7 @@ namespace Molla.Application.Extensions
         {
             return new SocialLink()
             {
-                Id = socialLinkDTO.Id,
+                ID = socialLinkDTO.ID,
                 Name = socialLinkDTO.Name,
                 IconSource = socialLinkDTO.IconSource,
                 Link = socialLinkDTO.Link
