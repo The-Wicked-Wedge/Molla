@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using Molla.Application.DTOs;
 using Molla.Application.Interfaces.IServices;
 
 namespace Molla.Presentation.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BanerAdminController : Controller
     {
         private readonly IBanerService banerService;
+        private readonly IPhotoService photoService;
 
-        public BanerAdminController(IBanerService banerService)
+        public BanerAdminController(IBanerService banerService,
+                                    IPhotoService photoService)
         {
             this.banerService = banerService;
+            this.photoService = photoService;
         }
 
         [Route("/Admin/Baner")]
@@ -40,19 +45,27 @@ namespace Molla.Presentation.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    baner.Error = "ModelState Is Not Valid";
-                    return View(baner);
+                    return Json("Error : ModelState Is Not Valid");
                 }
+
+                if(baner.ImageFile == null)
+                {
+                    return Json("Error : Select An Image First");
+                }
+
+                var upload = await photoService.AddPhotoAsync(baner.ImageFile);
+                baner.ImageSource = upload.Url.ToString();
+
                 await banerService.CreateAsync(baner);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
             catch(Exception ex)
             {
 
                 baner.Error = ex.Message;
 
-                return View(baner);
+                return Json("Error : "+ ex.Message);
             
             }
         }
@@ -61,23 +74,19 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [Route("/Admin/Baner/Edit")]
         public async Task<IActionResult> Edit(Guid Id)
         {
-
             try
             {
                 var baner = await banerService.GetByIdAsync(Id);
 
                 if(baner == null)
                 {
-                    return NotFound(StatusCodes.Status404NotFound);
+                    return RedirectToAction("Index");
                 }
-
                 return View(baner);
-
-
             }
             catch(Exception ex)
             {
-                return NotFound(StatusCodes.Status500InternalServerError);
+                return Json("Error : " + ex.Message);
             }
         }
 
@@ -89,17 +98,21 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    baner.Error = "ModelState Is Not Valid";
-                    return View(baner);
+                    return Json("Error : Model State Is Not Valid");
                 }
+                if(baner.ImageFile != null)
+                {
+                    var upload = await photoService.AddPhotoAsync(baner.ImageFile);
+                    baner.ImageSource = upload.Url.ToString();
+                }
+
 
                 await banerService.UpdateAsync(baner);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }catch(Exception ex)
             {
-                baner.Error = ex.Message;
-                return View(baner);
+                return Json("Error : " + ex);
             }
         }
 
@@ -113,8 +126,11 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                 return Json(true);
             }catch(Exception ex)
             {
-                return Json(ex.Message);
+                return Json("Error : "+ex.Message);
             }
         }
+
+
+
     }
 }

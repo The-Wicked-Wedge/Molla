@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{614FB101-24A5-4EF0-8C49-DB8CE3F09FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molla.Domain", "Molla.Domain\Molla.Domain.csproj", "{00C7927A-2016-4D09-A21F-F1FB5E4FDD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Molla.Domain", "Molla.Domain\Molla.Domain.csproj", "{00C7927A-2016-4D09-A21F-F1FB5E4FDD9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molla.Application", "Molla.Application\Molla.Application.csproj", "{35B089E6-16B6-4AC7-ADA8-87E05FE3B697}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Molla.Application", "Molla.Application\Molla.Application.csproj", "{35B089E6-16B6-4AC7-ADA8-87E05FE3B697}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molla.Infrastructure.persistence", "Molla.Infrastructure.persistence\Molla.Infrastructure.persistence.csproj", "{598C9F6B-1B32-4C1D-94CA-662B0B0389A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Molla.Infrastructure.persistence", "Molla.Infrastructure.persistence\Molla.Infrastructure.persistence.csproj", "{598C9F6B-1B32-4C1D-94CA-662B0B0389A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molla.Infrastructure", "Molla.Infrastructure\Molla.Infrastructure.csproj", "{3072122D-17F2-4F3B-9CC7-30FA648286FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Molla.Infrastructure", "Molla.Infrastructure\Molla.Infrastructure.csproj", "{3072122D-17F2-4F3B-9CC7-30FA648286FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Molla.Presentation", "Molla.Presentation\Molla.Presentation.csproj", "{C405A3ED-3730-4AA0-875D-C64474ABDD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Molla.Presentation", "Molla.Presentation\Molla.Presentation.csproj", "{C405A3ED-3730-4AA0-875D-C64474ABDD7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,7 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Domain.Entities;
 
+
 namespace Molla.Application.Extensions
 {
     public static class CustomMapper
@@ -68,6 +69,25 @@ namespace Molla.Application.Extensions
                 UpdateDate = baner.UpdateDate
             };
         }
-
+        public static SocialLinkDTO ConvertToDTO(this SocialLink socialLink)
+        {
+            return new SocialLinkDTO()
+            {
+                Id = socialLink.Id,
+                Name = socialLink.Name,
+                Link = socialLink.Link,
+                IconSource = socialLink.IconSource
+            };
+        }
+        public static SocialLink ConvertToModel(this SocialLinkDTO socialLinkDTO)
+        {
+            return new SocialLink()
+            {
+                Id = socialLinkDTO.Id,
+                Name = socialLinkDTO.Name,
+                IconSource = socialLinkDTO.IconSource,
+                Link = socialLinkDTO.Link
+            };
+        }
     }
 }

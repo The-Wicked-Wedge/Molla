@@ -17,6 +17,7 @@ namespace Molla.Application.Services
         }
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
+
             var resualt = await _banerRepository.Create(banerDTO.ConvertBanerDTOToBaner());
             if (resualt)
             {
@@ -26,6 +27,7 @@ namespace Molla.Application.Services
             {
                 return false;
             }
+
         }
 
         public async Task<bool> DeleteByIdAsync(Guid id)
@@ -60,6 +62,7 @@ namespace Molla.Application.Services
 
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
+
             BanerDTO baner = await GetByIdAsync(BanerDTO.ID);
             if(baner != null)
             {
