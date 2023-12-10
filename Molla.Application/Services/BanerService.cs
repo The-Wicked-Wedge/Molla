@@ -63,6 +63,7 @@ namespace Molla.Application.Services
             BanerDTO baner = await GetByIdAsync(BanerDTO.ID);
             if(baner != null)
             {
+                BanerDTO.UpdateDate = DateTime.Now;
                 bool resualt = _banerRepository.Update(BanerDTO.ConvertBanerDTOToBaner());
                 if (resualt)
                 {
