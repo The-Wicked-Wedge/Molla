@@ -7,8 +7,6 @@ namespace Molla.Infrastructure.persistence.Common
 {
     public class ApplicationDbContext: IdentityDbContext
     {
-
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option)
             :base(option) 
         {
