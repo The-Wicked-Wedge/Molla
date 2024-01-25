@@ -23,7 +23,7 @@ namespace Molla.Application.Services
             return await socialLinkRepository.CreateAsync(socialLinkDTO.ConvertToModel());
         }
 
-        public async Task<bool> DeleteSocialLinkByIdAsync(int Id)
+        public async Task<bool> DeleteSocialLinkByIdAsync(Guid Id)
         {
             return await socialLinkRepository.DeleteByIdAsync(Id);
         }
@@ -41,12 +41,12 @@ namespace Molla.Application.Services
             return allSlDTOs;
         }
 
-        public async Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(int Id)
+        public async Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(Guid Id)
         {
             return (await socialLinkRepository.GetByIdAsNoTrackingAsync(Id)).ConvertToDTO();
         }
 
-        public async Task<SocialLinkDTO> GetByIdAsync(int Id)
+        public async Task<SocialLinkDTO> GetByIdAsync(Guid Id)
         {
             return (await socialLinkRepository.GetByIdAsync(Id)).ConvertToDTO();
         }

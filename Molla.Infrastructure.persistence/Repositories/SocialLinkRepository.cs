@@ -22,7 +22,7 @@ namespace Molla.Infrastructure.persistence.Repositories
             return await SaveAsync();
         }
 
-        public async Task<bool> DeleteByIdAsync(int Id)
+        public async Task<bool> DeleteByIdAsync(Guid Id)
         {
             context.SocialLinks.Remove(await GetByIdAsync(Id));
             return await SaveAsync();
@@ -33,14 +33,14 @@ namespace Molla.Infrastructure.persistence.Repositories
             return await context.SocialLinks.ToListAsync();
         }
 
-        public async Task<SocialLink> GetByIdAsNoTrackingAsync(int Id)
+        public async Task<SocialLink> GetByIdAsNoTrackingAsync(Guid Id)
         {
-            return await context.SocialLinks.AsNoTracking().FirstOrDefaultAsync(s => s.Id == Id);
+            return await context.SocialLinks.AsNoTracking().FirstOrDefaultAsync(s => s.ID == Id);
         }
 
-        public async Task<SocialLink> GetByIdAsync(int Id)
+        public async Task<SocialLink> GetByIdAsync(Guid Id)
         {
-            return await context.SocialLinks.FirstOrDefaultAsync(s => s.Id == Id);
+            return await context.SocialLinks.FirstOrDefaultAsync(s => s.ID == Id);
         }
 
         public async Task<bool> SaveAsync()

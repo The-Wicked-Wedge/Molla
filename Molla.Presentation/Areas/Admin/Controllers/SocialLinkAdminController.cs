@@ -48,7 +48,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         }
         [Route("/Admin/SocialLink/Edit")]
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id)
+        public async Task<IActionResult> Edit(Guid Id)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             }
         }
         [Route("/Admin/SocialLink/Delete/Id")]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Delete(Guid Id)
         {
             try
             {
