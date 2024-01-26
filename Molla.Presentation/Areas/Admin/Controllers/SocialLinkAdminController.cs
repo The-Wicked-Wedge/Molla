@@ -85,7 +85,9 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             }
         }
         [Route("/Admin/SocialLink/Delete/Id")]
+
         public async Task<IActionResult> Delete(SocialLinkDTO model)
+
         {
             try
             {

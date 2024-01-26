@@ -15,5 +15,6 @@ namespace Molla.Application.Interfaces.IServices
         Task<SocialLinkDTO> GetByIdAsync(Guid Id);
         Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(Guid Id);
         Task<bool> DeleteSocialLinkByIdAsync(SocialLinkDTO model);
+
     }
 }

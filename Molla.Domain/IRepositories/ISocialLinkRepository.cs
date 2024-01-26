@@ -5,6 +5,7 @@ namespace Molla.Domain.IRepositories
 {
     public interface ISocialLinkRepository
     {
+
         Task<SocialLink?> GetByIdAsync(Guid Id);
         Task<SocialLink?> GetByIdAsNoTrackingAsync(Guid Id);
 
@@ -14,5 +15,6 @@ namespace Molla.Domain.IRepositories
         bool Update(SocialLink model);
         bool Delete(SocialLink model);
         #endregion
+
     }
 }

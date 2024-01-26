@@ -28,7 +28,9 @@ namespace Molla.Application.Services
             return await socialLinkRepository.Create(socialLinkDTO.ConvertToModel());
         }
 
+
         public async Task<bool> DeleteSocialLinkByIdAsync(SocialLinkDTO model)
+
         {
             bool resualt = socialLinkRepository.Delete(model.ConvertToModel());
             if(resualt)

@@ -10,8 +10,10 @@ namespace Molla.Infrastructure.persistence.Repositories
     public class SocialLinkRepository(ApplicationDbContext context) 
         : GenericeRepository<SocialLink>(context), ISocialLinkRepository
     {
+
         
         public async Task<SocialLink?> GetByIdAsNoTrackingAsync(Guid Id)
+
         {
             return await context.SocialLinks.AsNoTracking().FirstOrDefaultAsync(s => s.ID == Id);
         }
