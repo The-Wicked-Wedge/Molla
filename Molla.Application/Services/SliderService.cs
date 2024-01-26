@@ -10,12 +10,12 @@ namespace Molla.Application.Services
 {
     public class SliderService : ISliderService
     {
-        private readonly ISliderRepository _sliderRepository ;
+        private readonly ISliderRepository _sliderRepository;
         private readonly IPhotoService _photoService;
         private readonly IApplicationUnitOfWork _uow;
-        
-        public SliderService(ISliderRepository sliderRepository , 
-            IPhotoService photoService, 
+
+        public SliderService(ISliderRepository sliderRepository,
+            IPhotoService photoService,
             IApplicationUnitOfWork applicationUnitOfWork)
         {
             _photoService = photoService;
@@ -29,51 +29,49 @@ namespace Molla.Application.Services
 
             var addPhoto = await _photoService.AddPhotoAsync(model.ImageFile);
             model.ImageSource = addPhoto.Uri.ToString();
-            IEnumerable<SliderDTO> countSliders = await GetAllAsync();
+            IEnumerable<SliderDTO> slidersLists = await GetAllAsync();
 
-            if (countSliders.Count() < 5 )
+            if (slidersLists.Count() < 5 && model.ImageSource != null && model.StartDate < model.EndDate)
             {
-                if(model.StartDate < model.EndDate)
+
+                var x = await IsAnyActiveSlider();
+                if (x && model.IsActive == true)
                 {
-                    var x = await IsAnyActiveSlider();
-                    if (x && model.IsActive == true)
+                    model.IsActive = false;
+                    Slider reverseDTO = model.ReverseDTO();
+                    bool result = await _sliderRepository.Create(reverseDTO);
+                    if (result)
                     {
-                        model.IsActive = false;
-                        Slider reverseDTO = model.ReverseDTO();
-                        bool result = await _sliderRepository.Create(reverseDTO);
-                        if (result)
-                        {
-                            return await _uow.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            await _photoService.DeletePhotoAsync(model.ImageSource);
-                            return false;
-                        }
+                        return await _uow.SaveChangesAsync();
                     }
                     else
                     {
-                        Slider reverseDTO = model.ReverseDTO();
-                        bool result = await _sliderRepository.Create(reverseDTO);
-                        if (result)
-                        {
-                            return await _uow.SaveChangesAsync();
-                        }
-                        else
-                        {
-                            await _photoService.DeletePhotoAsync(model.ImageSource);
-                            return false;
-                        }
+                        await _photoService.DeletePhotoAsync(model.ImageSource);
+                        return false;
                     }
                 }
-                return false;
+                else
+                {
+                    Slider reverseDTO = model.ReverseDTO();
+                    bool result = await _sliderRepository.Create(reverseDTO);
+                    if (result)
+                    {
+                        return await _uow.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        await _photoService.DeletePhotoAsync(model.ImageSource);
+                        return false;
+                    }
+                }
+
             }
             return false;
         }
         public async Task<bool> DeleteByIDAsync(Guid id)
         {
             SliderDTO x = await GetByIDAsync(id);
-            if(x != null)
+            if (x != null)
             {
                 var resault = _sliderRepository.Delete(x.ReverseDTO());
                 if (resault)
@@ -89,37 +87,33 @@ namespace Molla.Application.Services
             return false;
 
         }
-
         public async Task<IEnumerable<SliderDTO>> GetAllAsync()
         {
             IEnumerable<Slider> res = await _sliderRepository.GetAllAsync();
             IEnumerable<SliderDTO> toDTO = res.Select(s => s.ConvertToDTO()).ToList();
             return toDTO;
         }
-
         public async Task<SliderDTO> GetByIDAsync(Guid id)
         {
             Slider x = await _sliderRepository.GetByIDAsync(id);
             SliderDTO res = x.ConvertToDTO();
             return res;
         }
-
         public async Task<bool> IsAnyActiveSlider()
         {
             bool x = await _sliderRepository.IsAnyActiveSlider();
             return x;
         }
-
         public async Task<bool> UpdateByIDAsync(SliderDTO model)
         {
-            if(model.ImageFile != null)
+            if (model.ImageFile != null)
             {
                 var addNewPhoto = await _photoService.AddPhotoAsync(model.ImageFile);
-                model.ImageSource =  addNewPhoto.Uri.ToString();
-                await _photoService.DeletePhotoAsync(model.ImageSource);           
+                model.ImageSource = addNewPhoto.Uri.ToString();
+                await _photoService.DeletePhotoAsync(model.ImageSource);
             }
             Slider reverseDTO = model.ReverseDTO();
-            if(reverseDTO != null)
+            if (reverseDTO != null)
             {
                 bool result = _sliderRepository.Update(reverseDTO);
                 if (result)

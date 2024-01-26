@@ -17,12 +17,12 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [Route("/Admin/SocialLink")]
         public async Task<IActionResult> Index()
         {
-            return View(socialLinkService.GetAllSocialLinks());
+            return View( await socialLinkService.GetAllSocialLinks());
         }
 
         [Route("/Admin/SocialLink/Create")]
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View(new SocialLinkDTO());
         }
@@ -76,7 +76,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
                     return Json("Error : " + "ModelState Is Not Valid");
                 }
 
-                await socialLinkService.UpdateSocialLink(socialLinkDTO);
+                socialLinkService.UpdateSocialLink(socialLinkDTO);
                 return RedirectToAction("Index");
             }
             catch(Exception ex)
@@ -85,15 +85,17 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             }
         }
         [Route("/Admin/SocialLink/Delete/Id")]
-        public async Task<IActionResult> Delete(Guid Id)
+
+        public async Task<IActionResult> Delete(SocialLinkDTO model)
+
         {
             try
             {
-                if(await socialLinkService.GetByIdAsNoTrackingAsync(Id) == null)
+                if(await socialLinkService.GetByIdAsNoTrackingAsync(model.ID) == null)
                 {
                     return Json("Error : " + "This Item Doesn't Exist");
                 }
-                await socialLinkService.DeleteSocialLinkByIdAsync(Id);
+                await socialLinkService.DeleteSocialLinkByIdAsync(model);
 
                 return RedirectToAction("Index");
             }
