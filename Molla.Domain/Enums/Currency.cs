@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Molla.Domain.Enums
 {
-    public enum Currency
+    public enum Currency : byte
     {
         Dollar,
         Toman,

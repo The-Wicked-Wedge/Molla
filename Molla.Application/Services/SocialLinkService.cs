@@ -1,5 +1,6 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Application.Extensions;
+using Molla.Application.Interfaces;
 using Molla.Application.Interfaces.IServices;
 using Molla.Domain.IRepositories;
 using System;
@@ -13,19 +14,26 @@ namespace Molla.Application.Services
     public class SocialLinkService : ISocialLinkService
     {
         private readonly ISocialLinkRepository socialLinkRepository;
-        public SocialLinkService(ISocialLinkRepository socialLinkRepository)
+        private readonly IApplicationUnitOfWork _uow;
+
+
+        public SocialLinkService(ISocialLinkRepository socialLinkRepository , IApplicationUnitOfWork unitOfWork)
         {
             this.socialLinkRepository = socialLinkRepository;
+            _uow = unitOfWork;
         }
 
         public async Task<bool> CreateSocialLink(SocialLinkDTO socialLinkDTO)
         {
-            return await socialLinkRepository.CreateAsync(socialLinkDTO.ConvertToModel());
+            return await socialLinkRepository.Create(socialLinkDTO.ConvertToModel());
         }
 
-        public async Task<bool> DeleteSocialLinkByIdAsync(int Id)
+        public async Task<bool> DeleteSocialLinkByIdAsync(SocialLinkDTO model)
         {
-            return await socialLinkRepository.DeleteByIdAsync(Id);
+            bool resualt = socialLinkRepository.Delete(model.ConvertToModel());
+            if(resualt)
+                return await _uow.SaveChangesAsync();
+            return false;
         }
 
         public async Task<ICollection<SocialLinkDTO>> GetAllSocialLinks()
@@ -41,19 +49,19 @@ namespace Molla.Application.Services
             return allSlDTOs;
         }
 
-        public async Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(int Id)
+        public async Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(Guid Id)
         {
             return (await socialLinkRepository.GetByIdAsNoTrackingAsync(Id)).ConvertToDTO();
         }
 
-        public async Task<SocialLinkDTO> GetByIdAsync(int Id)
+        public async Task<SocialLinkDTO> GetByIdAsync(Guid Id)
         {
             return (await socialLinkRepository.GetByIdAsync(Id)).ConvertToDTO();
         }
 
-        public async Task<bool> UpdateSocialLink(SocialLinkDTO socialLinkDTO)
+        public bool UpdateSocialLink(SocialLinkDTO socialLinkDTO)
         {
-            return await socialLinkRepository.UpdateAsync(socialLinkDTO.ConvertToModel());
+            return  socialLinkRepository.Update(socialLinkDTO.ConvertToModel());
         }
     }
 }

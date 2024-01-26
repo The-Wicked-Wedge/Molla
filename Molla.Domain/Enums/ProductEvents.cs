@@ -1,6 +1,6 @@
 ﻿namespace Molla.Domain.Enums
 {
-    public enum ProductEvents
+    public enum ProductEvents:byte
     {
         New,
         Sale,

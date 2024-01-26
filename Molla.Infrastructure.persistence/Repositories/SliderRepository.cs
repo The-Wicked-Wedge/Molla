@@ -2,32 +2,21 @@
 using Molla.Domain.Entities;
 using Molla.Domain.IRepositories;
 using Molla.Infrastructure.persistence.Common;
-using Molla.Application.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Molla.Application.Interfaces;
-using Molla.Infrastructure.persistence.UnitOfWork;
-using Azure.Core;
 
-namespace Molla.Infrastructure.persistence.Repositories
+
+namespace Molla.Infrastructure.persistence.Repositories;
+public class SliderRepository(ApplicationDbContext context) : GenericeRepository<Slider>(context), ISliderRepository
 {
-    public class SliderRepository(ApplicationDbContext context) : 
-        GenericeRepository<Slider>(context), ISliderRepository
+    public async Task<Slider> GetByIDAsync(Guid id)
     {
-        public async Task<Slider> GetByIDAsync(Guid id)
-        {
-            Slider sliderById = await _context.Sliders.FirstOrDefaultAsync(x => x.ID == id);
-            return sliderById;
-        }
-        public async Task<bool> IsAnyActiveSlider()
-        {
-            IEnumerable<Slider> allSliders = await GetAllAsync();
-            bool isAnyActiveSlider = allSliders.Select(x => x.IsActive == true).Any();
-            return isAnyActiveSlider;
-        }
-
+        Slider sliderById = await _context.Sliders.FirstOrDefaultAsync(x => x.ID == id);
+        return sliderById;
+    }
+    public async Task<bool> IsAnyActiveSlider()
+    {
+        IEnumerable<Slider> allSliders = await GetAllAsync();
+        bool isAnyActiveSlider = allSliders.Select(x => x.IsActive == true).Any();
+        return isAnyActiveSlider;
     }
 }
+

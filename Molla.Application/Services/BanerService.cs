@@ -29,7 +29,6 @@ namespace Molla.Application.Services
             }
 
         }
-
         public async Task<bool> DeleteByIdAsync(Guid id)
         {
             BanerDTO baner  = await  GetByIdAsync(id);
@@ -48,18 +47,15 @@ namespace Molla.Application.Services
             return false;
 
         }
-
         public async Task<IEnumerable<BanerDTO>> GetAllAsync()
         {
             return (await _banerRepository.GetAllAsync()).Select(b => b.ConvertBanerToBanerDTO());
             
         }
-
         public async Task<BanerDTO> GetByIdAsync(Guid id)
         {
             return (await _banerRepository.GetByIdAsync(id)).ConvertBanerToBanerDTO();
         }
-
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
 

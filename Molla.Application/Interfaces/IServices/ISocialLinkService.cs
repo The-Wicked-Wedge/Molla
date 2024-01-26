@@ -10,10 +10,10 @@ namespace Molla.Application.Interfaces.IServices
     public interface ISocialLinkService
     {
         Task<bool> CreateSocialLink(SocialLinkDTO socialLinkDTO);
-        Task<bool> UpdateSocialLink(SocialLinkDTO socialLinkDTO);
+        bool UpdateSocialLink(SocialLinkDTO socialLinkDTO);
         Task<ICollection<SocialLinkDTO>> GetAllSocialLinks();
-        Task<SocialLinkDTO> GetByIdAsync(int Id);
-        Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(int Id);
-        Task<bool> DeleteSocialLinkByIdAsync(int Id);
+        Task<SocialLinkDTO> GetByIdAsync(Guid Id);
+        Task<SocialLinkDTO> GetByIdAsNoTrackingAsync(Guid Id);
+        Task<bool> DeleteSocialLinkByIdAsync(SocialLinkDTO model);
     }
 }

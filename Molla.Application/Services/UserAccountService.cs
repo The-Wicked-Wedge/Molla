@@ -12,6 +12,7 @@ namespace Molla.Application.Services
         private readonly IEmailProvider _emailProvider;
         private readonly SignInManager<IdentityUser> _singInManager;
         private readonly IApplicationUnitOfWork _uow;
+
         public UserAccountService(
             SignInManager<IdentityUser> singInManager, 
             IEmailProvider emailProvider, 

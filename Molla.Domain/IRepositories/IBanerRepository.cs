@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace Molla.Domain.IRepositories
 {
     public interface IBanerRepository
-    {
+    {        
+        Task<Baner> GetByIdAsync(Guid id);
+
         #region Generice Repository
         Task<IEnumerable<Baner>> GetAllAsync();
-        Task<Baner> GetByIdAsync(Guid id);
         Task<bool> Create(Baner baner);
         bool Update(Baner baner);
         bool Delete(Baner model);
