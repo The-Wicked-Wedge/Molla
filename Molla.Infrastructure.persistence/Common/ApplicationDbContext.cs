@@ -18,7 +18,11 @@ namespace Molla.Infrastructure.persistence.Common
         public DbSet<Baner> Baners { get; set; }
         public DbSet<SocialLink> SocialLinks { get; set; }
         public DbSet<CategoryGroup> CategoryGroups { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
 
     }
 }
