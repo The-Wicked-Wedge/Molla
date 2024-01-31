@@ -6,7 +6,6 @@ using Molla.Infrastructure.persistence.Common;
 using Molla.Infrastructure.persistence.Repositories;
 using Molla.Infrastructure.EmailProvider;
 using Microsoft.AspNetCore.Identity;
-using Molla.Domain.Entities;
 using Molla.Application.Interfaces.IPoviders;
 using Molla.Application.Interfaces;
 using Molla.Infrastructure.persistence.UnitOfWork;
