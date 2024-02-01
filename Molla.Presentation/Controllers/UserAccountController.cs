@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Molla.Application.DTOs;
 using Molla.Application.Interfaces.IServices;
+using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Identity;
 
 namespace Molla.Presentation.Controllers
 {
@@ -11,27 +13,29 @@ namespace Molla.Presentation.Controllers
         {
             _userAccountService = userAccountService;
         }
-        [Route("/Register")]
         [HttpGet]
         public IActionResult Index()
         {
-
             return View();
         }
-        [Route("/UserAccount/Register")]
         [HttpPost]
         public async Task<IActionResult> Index(RegisterUserDTO model)
         {
             await _userAccountService.RegisterAsync(model);
-            return View();
+            return RedirectToAction("Index","Home");
         }
 
-        [Route("/UserAccount/SingIn")]
         [HttpPost]
         public async Task<IActionResult> SingInAccount(LoginUserDTO model)
         {
             var x = await _userAccountService.LoginAccountAsync(model);
-            return View();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            await _userAccountService.LogOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -3,6 +3,7 @@ using Molla.Application.DTOs;
 using Molla.Application.Interfaces;
 using Molla.Application.Interfaces.IPoviders;
 using Molla.Application.Interfaces.IServices;
+using Molla.Domain.Entities;
 
 namespace Molla.Application.Services
 {
@@ -10,17 +11,17 @@ namespace Molla.Application.Services
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailProvider _emailProvider;
-        private readonly SignInManager<IdentityUser> _singInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IApplicationUnitOfWork _uow;
 
         public UserAccountService(
-            SignInManager<IdentityUser> singInManager, 
+            SignInManager<IdentityUser> signInManager, 
             IEmailProvider emailProvider, 
             UserManager<IdentityUser> userManager,
             IApplicationUnitOfWork applicationUnitOfWork)
         {
             _emailProvider = emailProvider;
-            _singInManager = singInManager;
+            _signInManager = signInManager;
             _userManager = userManager;
             _uow = applicationUnitOfWork;
         }
@@ -31,7 +32,7 @@ namespace Molla.Application.Services
             {
                 return false;
             }
-            var newUser = new IdentityUser()
+            var newUser = new User()
             {
                 Email = model.Email,
                 UserName = model.FullName,
@@ -57,7 +58,7 @@ namespace Molla.Application.Services
                 var userAccountLock = await _userManager.IsLockedOutAsync(user);
                 if (passwordChecking && !userAccountLock)
                 {
-                    var signIn = await _singInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    var signIn = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (signIn.Succeeded)
                     {
                         return true;
@@ -74,7 +75,7 @@ namespace Molla.Application.Services
             var email = new EmailDTO()
             {
                 Reciever = userEmail,
-                Body = "1234",
+                Body = $"Your Registration Code For Molla Web Site : {new Random().Next(1000,10000)}",
                 Subject = "Registration"
             };
             bool sendResgiterEmail = await _emailProvider.SendEmail(email);
@@ -84,6 +85,11 @@ namespace Molla.Application.Services
             }
             else
                 return default;
+        }
+        public async Task<bool> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return true;
         }
         public async Task<bool> ActivateUserAccount(string ID)
         {
