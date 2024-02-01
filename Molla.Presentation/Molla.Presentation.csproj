@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Molla.Application\Molla.Application.csproj" />
+    <ProjectReference Include="..\Molla.Domain\Molla.Domain.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure.persistence\Molla.Infrastructure.persistence.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure\Molla.Infrastructure.csproj" />
   </ItemGroup>

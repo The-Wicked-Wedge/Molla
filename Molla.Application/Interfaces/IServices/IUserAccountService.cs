@@ -11,7 +11,7 @@ namespace Molla.Application.Interfaces.IServices
     {
         Task<bool> RegisterAsync(RegisterUserDTO model);
         Task<bool> LoginAccountAsync(LoginUserDTO model);
-
+        Task<bool> LogOut();
         Task<bool> SendActiveUserAccountEmailAsync(string userEmail);
         Task<bool> ActivateUserAccount(string ID);
     }
