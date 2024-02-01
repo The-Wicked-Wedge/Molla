@@ -20,6 +20,7 @@
  
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.13" />
  
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Molla.Application\Molla.Application.csproj" />
+    <ProjectReference Include="..\Molla.Domain\Molla.Domain.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure.persistence\Molla.Infrastructure.persistence.csproj" />
     <ProjectReference Include="..\Molla.Infrastructure\Molla.Infrastructure.csproj" />
   </ItemGroup>

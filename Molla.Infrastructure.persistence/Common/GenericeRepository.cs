@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Molla.Domain.Common;
 using Molla.Domain.Entities;
-using Molla.Infrastructure.persistence.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Molla.Infrastructure.persistence.Repositories
+namespace Molla.Infrastructure.persistence.Common
 {
-    public class GenericeRepository<TEntity> where TEntity : class,IEntity
+    public class GenericeRepository<TEntity> where TEntity : class, IEntity
     {
         protected readonly ApplicationDbContext _context;
         public GenericeRepository(ApplicationDbContext context)
