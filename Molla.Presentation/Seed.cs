@@ -6,7 +6,14 @@ namespace Molla.Presentation
 {
     public class Seed
     {
-        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        /// <summary>
+        /// pass must contain UpperCase, LowerCase , SpecialChars(!@#) , and numbers 
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <param name="username"></param>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder, string username , string pass)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -27,16 +34,12 @@ namespace Molla.Presentation
                 {
                     var newAdminUser = new User()
                     {
-                        //UserName = "mehregan",
-                        //Email = adminUserEmail,
-                        //EmailConfirmed = true,
-                        //Address = new Address()
-                        //{
-                        //    FullAddress = "TestAddress",
-                        //    PostalCode = "TestPodtalCode"
-                        //}
+                        UserName = username,
+                        Email = adminUserEmail,
+                        EmailConfirmed = true
+                        
                     };
-                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.CreateAsync(newAdminUser, pass);
                     await userManager.AddToRoleAsync(newAdminUser, "admin");
                 }
 

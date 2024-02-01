@@ -10,7 +10,6 @@ namespace Molla.Domain.Entities
 {
     public class User : IdentityUser
     {
-     
 
     }
     public class Address
