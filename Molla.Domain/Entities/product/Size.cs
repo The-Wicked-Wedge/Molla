@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Molla.Domain.Common;
 
 namespace Molla.Domain.Entities.product
 {
-	public class Size
+	public class Size : IEntity
 	{
 
 		[Key]
