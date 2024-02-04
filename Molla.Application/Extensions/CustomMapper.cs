@@ -1,4 +1,6 @@
 ﻿using Molla.Application.DTOs;
+using Molla.Application.DTOs.AdminDashBoard;
+using Molla.Application.Services;
 using Molla.Domain.Entities;
 
 
@@ -86,6 +88,19 @@ namespace Molla.Application.Extensions
                 Name = socialLinkDTO.Name,
                 IconSource = socialLinkDTO.IconSource,
                 Link = socialLinkDTO.Link
+            };
+        }
+
+        public static AdminDashBoardUserDTO ConvertToDTO(this User user)
+        {
+            return new AdminDashBoardUserDTO()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                NumberOFPurchases = 0,
+                Phone = user.PhoneNumber,
+                PurchasedValue = 0,
+                UserName = user.UserName
             };
         }
     }

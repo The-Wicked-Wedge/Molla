@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Molla.Domain.Entities;
+using Molla.Domain.Entities.AdminDashBoard;
 using Molla.Domain.Entities.category;
 using Molla.Domain.Entities.product;
 
@@ -28,7 +29,7 @@ namespace Molla.Infrastructure.persistence.Common
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
 
-
+        public DbSet<OFFModel> OffTickets { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses  { get; set; }
 
