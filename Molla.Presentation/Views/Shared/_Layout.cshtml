@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>قالب Molla - قالب بوت استرپ فروشگاهی</title>
+    <title>Molla</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Molla - Bootstrap eCommerce Template">
     <!-- Favicon -->
@@ -38,32 +38,13 @@
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
-                        <div class="header-dropdown">
-                            <a href="#">تومان</a>
-                            <div class="header-menu">
-                                <ul>
-                                    <li><a href="#">دلار</a></li>
-                                    <li><a href="#">تومان</a></li>
-                                </ul>
-                            </div><!-- End .header-menu -->
-                        </div><!-- End .header-dropdown -->
-
-                        <div class="header-dropdown">
-                            <a href="#">فارسی</a>
-                            <div class="header-menu">
-                                <ul>
-                                    <li><a href="#">انگلیسی</a></li>
-                                    <li><a href="#">فرانسوی</a></li>
-                                    <li><a href="#">ترکی استانبولی</a></li>
-                                </ul>
-                            </div><!-- End .header-menu -->
-                        </div><!-- End .header-dropdown -->
+                        
+                       
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
                         <ul class="top-menu">
                             <li>
-                                <a href="#">لینک ها</a>
                                 <ul>
                                     <li><a href="tel:#"><i class="icon-phone"></i>تلفن تماس : 02155667788</a></li>
                                     <li>
@@ -74,9 +55,16 @@
                                     </li>
                                     <li><a href="about.html">درباره ما</a></li>
                                     <li><a href="contact.html">تماس با ما</a></li>
+                                    @if(User.Identity.IsAuthenticated){
+                                        <li>
+                                            <a href="/Register"><i class="icon-user"></i>خروج</a>
+                                        </li>
+                                    }else{
+
                                     <li>
-                                        <a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>ورود</a>
+                                        <a href="/Register" ><i class="icon-user"></i>ورود</a>
                                     </li>
+                                    }
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->

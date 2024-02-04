@@ -51,8 +51,7 @@ namespace Molla.Application.Extensions
                 EndDate = baner.EndDate,
                 ImageSource = baner.ImageSource,
                 StartDate = baner.StartDate,
-                Title = baner.Title,
-                UpdateDate = (DateTime)baner.UpdateDate
+                Title = baner.Title
             };
         }
         public static Baner ConvertBanerDTOToBaner(this BanerDTO baner)
