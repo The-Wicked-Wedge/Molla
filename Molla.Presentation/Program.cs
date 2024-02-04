@@ -35,12 +35,25 @@ namespace Molla.Presentation
             builder.Services.AddScoped<IUserAccountService, UserAccountService>();
             builder.Services.AddScoped<IPhotoService, PhotoService>();
             builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
+            builder.Services.AddScoped<IAdminDashboardService, AdminDashBoardService>();
+            builder.Services.AddScoped<IHomeIndexService, HomeIndexService>();
             #endregion
 
 
             #region Repositories
             builder.Services.AddScoped<ISliderRepository, SliderRepository>();
             builder.Services.AddScoped<IBanerRepository, BanerRepository>();
+            builder.Services.AddScoped<IOFFRepository,OFFRepository>();
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+            builder.Services.AddScoped<ICategoryGroupRepository, CategoryGroupRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductRepository,ProductRepository>();
+            builder.Services.AddScoped<IColorRepository, ColorRepository>();
+            builder.Services.AddScoped<ISizeRepository,SizeRepository>();
+            builder.Services.AddScoped<IGalleryRepository,GalleryRepository>();
+            builder.Services.AddScoped<IStockByColorSizeRepository,StockByColorSizeRepository>();
+            builder.Services.AddScoped<IAboutUsRepository, AboutUsRepository>();
+            builder.Services.AddScoped<IContactUsRepository,ContactUsRepository>();
             #endregion
 
 

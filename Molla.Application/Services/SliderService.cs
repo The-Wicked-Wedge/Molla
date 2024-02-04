@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Molla.Application.DTOs;
+using Molla.Application.DTOs.SiteSide;
 using Molla.Application.Extensions;
 using Molla.Application.Interfaces;
 using Molla.Application.Interfaces.IServices;
 using Molla.Domain.Entities;
 using Molla.Domain.IRepositories;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Molla.Application.Services
 {
@@ -126,6 +128,11 @@ namespace Molla.Application.Services
                 }
             }
             return false;
+        }
+
+        public async Task<IEnumerable<HomeSliderDTO>> GetHomeSliderAsync()
+        {
+            return (await _sliderRepository.GetAllNoTrackingAsync()).Select(o => o.ToHomeSlider());
         }
     }
 }

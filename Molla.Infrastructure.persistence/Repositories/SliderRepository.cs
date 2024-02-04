@@ -18,5 +18,10 @@ public class SliderRepository(ApplicationDbContext context) : GenericeRepository
         bool isAnyActiveSlider = allSliders.Select(x => x.IsActive == true).Any();
         return isAnyActiveSlider;
     }
+
+    public async Task<List<Slider>> GetAllNoTrackingAsync()
+    {
+        return await _context.Sliders.AsNoTracking().ToListAsync();
+    }
 }
 

@@ -1,5 +1,6 @@
 ﻿using Molla.Application.DTOs;
 using Molla.Application.DTOs.AdminDashBoard;
+using Molla.Application.DTOs.SiteSide;
 using Molla.Application.Services;
 using Molla.Domain.Entities;
 
@@ -41,6 +42,19 @@ namespace Molla.Application.Extensions
                 StartDate = model.StartDate,
                 UpdateDate = model.UpdateDate,
                 Events = model.Events
+            };
+        }
+
+        public static HomeSliderDTO ToHomeSlider(this Slider model)
+        {
+            return new HomeSliderDTO() 
+            { 
+                ImageSource = model.ImageSource,
+                Description = model.Description,
+                Link = model.Link,
+                Title = model.Title,
+                Tag = model.Tag
+            
             };
         }
         public static BanerDTO ConvertBanerToBanerDTO(this Baner baner)
