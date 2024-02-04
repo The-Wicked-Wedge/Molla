@@ -25,6 +25,8 @@ namespace Molla.Infrastructure.persistence.Common
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
         public DbSet<StockByColorSize> StockByColorSizes { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
 
 
         public DbSet<User> Users { get; set; }
