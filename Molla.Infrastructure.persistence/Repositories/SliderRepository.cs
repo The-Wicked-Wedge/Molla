@@ -21,7 +21,7 @@ public class SliderRepository(ApplicationDbContext context) : GenericeRepository
 
     public async Task<List<Slider>> GetAllNoTrackingAsync()
     {
-        return await _context.Sliders.AsNoTracking().ToListAsync();
+        return await _context.Sliders.AsNoTracking().Where(p=>p.IsActive==true).ToListAsync();
     }
 }
 
