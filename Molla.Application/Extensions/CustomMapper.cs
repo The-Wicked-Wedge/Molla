@@ -1,4 +1,7 @@
 ﻿using Molla.Application.DTOs;
+using Molla.Application.DTOs.AdminDashBoard;
+using Molla.Application.DTOs.SiteSide;
+using Molla.Application.Services;
 using Molla.Domain.Entities;
 
 
@@ -39,6 +42,19 @@ namespace Molla.Application.Extensions
                 StartDate = model.StartDate,
                 UpdateDate = model.UpdateDate,
                 Events = model.Events
+            };
+        }
+
+        public static HomeSliderDTO ToHomeSlider(this Slider model)
+        {
+            return new HomeSliderDTO() 
+            { 
+                ImageSource = model.ImageSource,
+                Description = model.Description,
+                Link = model.Link,
+                Title = model.Title,
+                Tag = model.Tag
+            
             };
         }
         public static BanerDTO ConvertBanerToBanerDTO(this Baner baner)
@@ -86,6 +102,42 @@ namespace Molla.Application.Extensions
                 Name = socialLinkDTO.Name,
                 IconSource = socialLinkDTO.IconSource,
                 Link = socialLinkDTO.Link
+            };
+        }
+
+        public static AdminDashBoardUserDTO ConvertToDTO(this User user)
+        {
+            return new AdminDashBoardUserDTO()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                NumberOFPurchases = 0,
+                Phone = user.PhoneNumber,
+                PurchasedValue = 0,
+                UserName = user.UserName
+            };
+        }
+
+        public static OrderDTO CovertToDTO(this Order order)
+        {
+            return new OrderDTO()
+            {
+                Id = order.Id,
+                ProductId = order.ProductId,
+                UserId = order.UserId,
+                Price = order.Price,
+                Completed = order.Completed
+            };
+        }
+        public static Order CovertToModel(this OrderDTO orderDTO)
+        {
+            return new Order()
+            {
+                Id = orderDTO.Id,
+                ProductId = orderDTO.ProductId,
+                UserId = orderDTO.UserId,
+                Price = orderDTO.Price,
+                Completed = orderDTO.Completed
             };
         }
     }
