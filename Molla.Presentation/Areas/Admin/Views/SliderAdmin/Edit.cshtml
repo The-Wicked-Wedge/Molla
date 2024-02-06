@@ -4,19 +4,24 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminTemplate.cshtml";
 }
 
-<h1>Edit</h1>
 
 @using (Html.BeginForm("Edit", "SliderAdmin", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" value="@Model.ID" asp-for="ID" />
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ImageSource, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.ImageSource, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ImageSource, "", new { @class = "text-danger" })
+                    <div>
+                        <img src="@Html.DisplayFor(model => model.ImageSource)" width="250" height="250" />
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.ImageFile, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -67,7 +72,7 @@
                     @Html.ValidationMessageFor(model => model.Events, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    <input type="button" id="editsubmit" value="Create" class="btn btn-primary" />
+                    <input type="submit" id="editsubmit" value="ثبت" class="btn btn-primary" />
                 </div>
             </form>
         </div>
