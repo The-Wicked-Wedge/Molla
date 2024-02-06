@@ -103,5 +103,28 @@ namespace Molla.Application.Extensions
                 UserName = user.UserName
             };
         }
+
+        public static OrderDTO CovertToDTO(this Order order)
+        {
+            return new OrderDTO()
+            {
+                Id = order.Id,
+                ProductId = order.ProductId,
+                UserId = order.UserId,
+                Price = order.Price,
+                Completed = order.Completed
+            };
+        }
+        public static Order CovertToModel(this OrderDTO orderDTO)
+        {
+            return new Order()
+            {
+                Id = orderDTO.Id,
+                ProductId = orderDTO.ProductId,
+                UserId = orderDTO.UserId,
+                Price = orderDTO.Price,
+                Completed = orderDTO.Completed
+            };
+        }
     }
 }
