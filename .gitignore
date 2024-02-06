@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Molla.Infrastructure.persistence/Migrations/20240204194445_addaboutmecontactus.cs
+/Molla.Infrastructure.persistence/Migrations/20240204194445_addaboutmecontactus.Designer.cs
+/Molla.Infrastructure.persistence/Migrations/ApplicationDbContextModelSnapshot.cs
