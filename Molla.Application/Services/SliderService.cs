@@ -28,6 +28,8 @@ namespace Molla.Application.Services
 
         public async Task<bool> CreateAsync(SliderDTO model)
         {
+            model.CreateDate= DateTime.Now;
+            model.UpdateDate = model.CreateDate;
 
             var addPhoto = await _photoService.AddPhotoAsync(model.ImageFile);
             model.ImageSource = addPhoto.Uri.ToString();
