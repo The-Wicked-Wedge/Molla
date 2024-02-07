@@ -6,15 +6,13 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminTemplate.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>Slider</h4>
 <hr />
 @using (Html.BeginForm("Create", "SliderAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+            <form  asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                     @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -70,7 +68,7 @@
                     @Html.ValidationMessageFor(model => model.Events, "", new { @class = "text-danger" })
                 </div>
             <div class="form-group">
-                <input type="button" id="createsubmit" value="Create" class="btn btn-primary" />
+                    <input type="submit" id="createsubmit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

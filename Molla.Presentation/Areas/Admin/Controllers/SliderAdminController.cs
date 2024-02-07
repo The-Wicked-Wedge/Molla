@@ -29,6 +29,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SliderDTO model)
         {
+            ModelState.Remove("ImageSource");
             try
             {
                 if (!ModelState.IsValid)
