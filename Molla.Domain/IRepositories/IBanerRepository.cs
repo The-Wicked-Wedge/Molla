@@ -11,6 +11,8 @@ namespace Molla.Domain.IRepositories
     {        
         Task<Baner> GetByIdAsync(Guid id);
 
+        Task<Baner> GetByIdNoTrackingAsync(Guid id);
+
         #region Generice Repository
         Task<IEnumerable<Baner>> GetAllAsync();
         Task<bool> Create(Baner baner);

@@ -14,6 +14,7 @@ namespace Molla.Application.Extensions
             return new SliderDTO
             {
                 CreateDate = model.CreateDate,
+                UpdateDate=model.UpdateDate,
                 Description = model.Description,
                 ImageSource = model.ImageSource,
                 Tag = model.Tag,
@@ -67,7 +68,8 @@ namespace Molla.Application.Extensions
                 EndDate = baner.EndDate,
                 ImageSource = baner.ImageSource,
                 StartDate = baner.StartDate,
-                Title = baner.Title
+                Title = baner.Title,
+                UpdateDate= baner.UpdateDate
             };
         }
         public static Baner ConvertBanerDTOToBaner(this BanerDTO baner)

@@ -17,24 +17,24 @@ namespace Molla.Application.DTOs
         public DateTime CreateDate { get; set; }
         [Display(Name = "Update date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public string ImageSource { get; set; }
 
-        [Display(Name = "Start Date")]
-        [Required(ErrorMessage = "Start Date Can't Be Null")]
+        [Display(Name = "نمایش از تاریخ و ساعت")]
+        [Required(ErrorMessage = "please enter {0}")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "End Date")]
-        [Required(ErrorMessage = "Start Date Can't Be Null")]
+        [Display(Name = "تا تاریخ و ساعت")]
+        [Required(ErrorMessage = "please enter {0}")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "Title")]
+        [Display(Name = "عنوان")]
         [Required(ErrorMessage = "Baner Can't Have Null Title")]
         public string Title { get; set; }                    
 
-        [Display(Name = "Description")]
+        [Display(Name = "توضیحات")]
         public string? BanerDescription { get; set; }
         public IFormFile? ImageFile { get; set; }
         public string? Error { get; set; }

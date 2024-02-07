@@ -12,6 +12,12 @@ public class SliderRepository(ApplicationDbContext context) : GenericeRepository
         Slider sliderById = await _context.Sliders.FirstOrDefaultAsync(x => x.ID == id);
         return sliderById;
     }
+
+    public async Task<Slider> GetByIDNoTrackingAsync(Guid id)
+    {
+        Slider sliderById = await _context.Sliders.AsNoTracking().FirstOrDefaultAsync(x => x.ID == id);
+        return sliderById;
+    }
     public async Task<bool> IsAnyActiveSlider()
     {
         IEnumerable<Slider> allSliders = await GetAllAsync();
