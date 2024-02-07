@@ -3,7 +3,7 @@ using Molla.Application.DTOs.AdminDashBoard;
 using Molla.Application.DTOs.SiteSide;
 using Molla.Application.Services;
 using Molla.Domain.Entities;
-
+using Molla.Domain.Entities.category;
 
 namespace Molla.Application.Extensions
 {
@@ -140,5 +140,21 @@ namespace Molla.Application.Extensions
                 Completed = orderDTO.Completed
             };
         }
-    }
+        public static AdminCategoryGroupDTO ConvertToDTO(this CategoryGroup categoryGroup)
+        {
+            return new AdminCategoryGroupDTO()
+            {
+                id = categoryGroup.ID,
+                name = categoryGroup.Name
+            };
+        }
+		public static CategoryGroup ConvertToModel(this AdminCategoryGroupDTO adminCategoryGroupDTO)
+        {
+            return new CategoryGroup()
+            {
+                ID = adminCategoryGroupDTO.id,
+                Name = adminCategoryGroupDTO.name
+            };
+        }
+	}
 }
