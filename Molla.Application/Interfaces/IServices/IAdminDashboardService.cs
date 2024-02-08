@@ -1,4 +1,5 @@
-﻿using Molla.Application.DTOs.AdminDashBoard;
+﻿using Molla.Application.DTOs;
+using Molla.Application.DTOs.AdminDashBoard;
 using Molla.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Molla.Application.Interfaces.IServices
         Task<AdminDashBoardUserDTO> GetUserById(string Id);
         Task<bool> AddTicket(int OFFPercentage,string UserId);
         Task<IEnumerable<AdminDashBoardUserDTO>> ConfirmedEmailUsers();
+        Task<IEnumerable<OrderDTO>> GetAllOrdersSummary();
     }
 }
