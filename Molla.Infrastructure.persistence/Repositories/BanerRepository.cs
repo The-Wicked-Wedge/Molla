@@ -19,6 +19,11 @@ namespace Molla.Infrastructure.persistence.Repositories
         {
             return await _context.Baners.FirstOrDefaultAsync(b => b.ID == id);
         }
+        
+        public async Task<Baner> GetByIdNoTrackingAsync(Guid id)
+        {
+            return await _context.Baners.AsNoTracking().FirstOrDefaultAsync(b => b.ID == id);
+        }
 
     }
 }

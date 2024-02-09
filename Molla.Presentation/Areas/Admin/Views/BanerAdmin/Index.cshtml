@@ -10,17 +10,12 @@
 <div class="container col-12">
 
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create">بنر جدید</a>
     </p>
     <table class="table table-responsive table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
+                
                 <th>
                     @Html.DisplayNameFor(model => model.StartDate)
                 </th>
@@ -28,13 +23,13 @@
                     @Html.DisplayNameFor(model => model.EndDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.UpdateDate)
+                    @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BanerDescription)
                 </th>
                 <th>
-                    Management
+                    مدیریت
                 </th>
             </tr>
         </thead>
@@ -42,29 +37,26 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                    <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate)
-                    </td>
+                    
+
                     <td>
                             @Html.DisplayFor(modelItem => item.StartDate)
                     </td>
                     <td>
                             @Html.DisplayFor(modelItem => item.EndDate)
                     </td>
+
+
                     <td>
-                            @Html.DisplayFor(modelItem => item.UpdateDate)
+                        @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
-                            @Html.DisplayFor(modelItem => item.BanerDescription)
+                        @Html.DisplayFor(modelItem => item.BanerDescription)
                     </td>
                     <td>
-                            @Html.ActionLink("Edit", "Edit", new {  id=item.ID  }) |
+                            @Html.ActionLink("ویرایش", "Edit", new { id = item.ID }) |
                             @* @Html.ActionLink("Details", "Details", new { id=item.ID }) | *@
-                            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                            @Html.ActionLink("حذف", "Delete", new { id=item.ID })
                     </td>
                 </tr>
             }

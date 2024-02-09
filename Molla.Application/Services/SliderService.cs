@@ -74,7 +74,8 @@ namespace Molla.Application.Services
         }
         public async Task<bool> DeleteByIDAsync(Guid id)
         {
-            SliderDTO x = await GetByIDAsync(id);
+            SliderDTO x =CustomMapper.ConvertToDTO( await _sliderRepository.GetByIDNoTrackingAsync(id));
+            
             if (x != null)
             {
                 var resault = _sliderRepository.Delete(x.ReverseDTO());
@@ -116,9 +117,14 @@ namespace Molla.Application.Services
                 model.ImageSource = addNewPhoto.Uri.ToString();
                 await _photoService.DeletePhotoAsync(model.ImageSource);
             }
+            
+            Slider slider = await _sliderRepository.GetByIDNoTrackingAsync(model.ID);
+            if (model.ImageSource == null) model.ImageSource = slider.ImageSource;
+
             Slider reverseDTO = model.ReverseDTO();
-            if (reverseDTO != null)
+            if (reverseDTO != null && slider != null)
             {
+                model.UpdateDate = DateTime.Now;
                 bool result = _sliderRepository.Update(reverseDTO);
                 if (result)
                 {

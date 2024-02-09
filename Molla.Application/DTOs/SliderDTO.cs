@@ -20,7 +20,7 @@ namespace Molla.Application.DTOs
         public DateTime CreateDate { get; set; }
         [Display(Name = "Update date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         public required string ImageSource { get; set; }
         [Display(Name = "نمایش از تاریخ و ساعت")]
