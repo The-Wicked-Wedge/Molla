@@ -9,15 +9,18 @@ namespace Molla.Application.Services
     public class BanerService : IBanerService
     {
         private readonly IBanerRepository _banerRepository;
+        private readonly IPhotoService _photoService;
         private readonly IApplicationUnitOfWork _uow;
-        public BanerService(IBanerRepository banerRepository, IApplicationUnitOfWork uow)
+        public BanerService(IBanerRepository banerRepository, IApplicationUnitOfWork uow,IPhotoService photoService)
         {
             _banerRepository = banerRepository;
             _uow = uow;
+            _photoService = photoService;
         }
         public async Task<bool> CreateAsync(BanerDTO banerDTO)
         {
-
+            banerDTO.CreateDate = DateTime.Now;
+            banerDTO.UpdateDate = banerDTO.CreateDate;
             var resualt = await _banerRepository.Create(banerDTO.ConvertBanerDTOToBaner());
             if (resualt)
             {
@@ -31,12 +34,13 @@ namespace Molla.Application.Services
         }
         public async Task<bool> DeleteByIdAsync(Guid id)
         {
-            BanerDTO baner  = await  GetByIdAsync(id);
+            BanerDTO baner  = await  GetByIdNoTrackingAsync(id);
             if(baner != null)
             {
                 bool resualt = _banerRepository.Delete(baner.ConvertBanerDTOToBaner());
                 if (resualt)
                 {
+                    await _photoService.DeletePhotoAsync(baner.ImageSource);
                     return await _uow.SaveChangesAsync();
                 }
                 else
@@ -56,13 +60,18 @@ namespace Molla.Application.Services
         {
             return (await _banerRepository.GetByIdAsync(id)).ConvertBanerToBanerDTO();
         }
+        public async Task<BanerDTO> GetByIdNoTrackingAsync(Guid id)
+        {
+            return (await _banerRepository.GetByIdNoTrackingAsync(id)).ConvertBanerToBanerDTO();
+        }
         public async Task<bool> UpdateAsync(BanerDTO BanerDTO)
         {
 
-            BanerDTO baner = await GetByIdAsync(BanerDTO.ID);
+            BanerDTO baner = await GetByIdNoTrackingAsync(BanerDTO.ID);
             if(baner != null)
             {
                 BanerDTO.UpdateDate = DateTime.Now;
+                if(BanerDTO.ImageSource == null) BanerDTO.ImageSource = baner.ImageSource;
                 bool resualt = _banerRepository.Update(BanerDTO.ConvertBanerDTOToBaner());
                 if (resualt)
                 {

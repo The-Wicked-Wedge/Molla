@@ -7,12 +7,24 @@
 <div>
 
     
-    @using (Html.BeginForm("Edit", "SliderAdmin", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "BanerAdmin", FormMethod.Post))
     {
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" value="@Model.ID" asp-for="ID" />
+                    <div class="form-group">
+                        <div>
+                            <img src="@Html.DisplayFor(model => model.ImageSource)" width="450" height="450" />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.ImageFile, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
@@ -24,19 +36,24 @@
                         @Html.ValidationMessageFor(model => model.BanerDescription, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
                         @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
-                        <input type="button" id="editsubmit" value="Create" class="btn btn-primary" />
+                        <input type="submit" id="editsubmit" value="ثبت تغییرات" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
     }
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">بازگشت به لیست</a>
     </div>
 </div>
 <script src="~/js/CustomJsFiles/AdminBaner/Edit.min.js"></script>

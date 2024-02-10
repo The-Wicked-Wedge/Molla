@@ -1,6 +1,9 @@
 ﻿using Molla.Application.DTOs;
+using Molla.Application.DTOs.AdminDashBoard;
+using Molla.Application.DTOs.SiteSide;
+using Molla.Application.Services;
 using Molla.Domain.Entities;
-
+using Molla.Domain.Entities.category;
 
 namespace Molla.Application.Extensions
 {
@@ -11,6 +14,7 @@ namespace Molla.Application.Extensions
             return new SliderDTO
             {
                 CreateDate = model.CreateDate,
+                UpdateDate=model.UpdateDate,
                 Description = model.Description,
                 ImageSource = model.ImageSource,
                 Tag = model.Tag,
@@ -41,6 +45,19 @@ namespace Molla.Application.Extensions
                 Events = model.Events
             };
         }
+
+        public static HomeSliderDTO ToHomeSlider(this Slider model)
+        {
+            return new HomeSliderDTO() 
+            { 
+                ImageSource = model.ImageSource,
+                Description = model.Description,
+                Link = model.Link,
+                Title = model.Title,
+                Tag = model.Tag
+            
+            };
+        }
         public static BanerDTO ConvertBanerToBanerDTO(this Baner baner)
         {
             return new BanerDTO
@@ -51,7 +68,8 @@ namespace Molla.Application.Extensions
                 EndDate = baner.EndDate,
                 ImageSource = baner.ImageSource,
                 StartDate = baner.StartDate,
-                Title = baner.Title
+                Title = baner.Title,
+                UpdateDate= baner.UpdateDate
             };
         }
         public static Baner ConvertBanerDTOToBaner(this BanerDTO baner)
@@ -88,5 +106,57 @@ namespace Molla.Application.Extensions
                 Link = socialLinkDTO.Link
             };
         }
-    }
+
+        public static AdminDashBoardUserDTO ConvertToDTO(this User user)
+        {
+            return new AdminDashBoardUserDTO()
+            {
+                Email = user.Email,
+                Id = user.Id,
+                NumberOFPurchases = 0,
+                Phone = user.PhoneNumber,
+                PurchasedValue = 0,
+                UserName = user.UserName
+            };
+        }
+
+        public static OrderDTO CovertToDTO(this Order order)
+        {
+            return new OrderDTO()
+            {
+                Id = order.Id,
+                ProductId = order.ProductId,
+                UserId = order.UserId,
+                Price = order.Price,
+                Completed = order.Completed
+            };
+        }
+        public static Order CovertToModel(this OrderDTO orderDTO)
+        {
+            return new Order()
+            {
+                Id = orderDTO.Id,
+                ProductId = orderDTO.ProductId,
+                UserId = orderDTO.UserId,
+                Price = orderDTO.Price,
+                Completed = orderDTO.Completed
+            };
+        }
+        public static AdminCategoryGroupDTO ConvertToDTO(this CategoryGroup categoryGroup)
+        {
+            return new AdminCategoryGroupDTO()
+            {
+                id = categoryGroup.ID,
+                name = categoryGroup.Name
+            };
+        }
+		public static CategoryGroup ConvertToModel(this AdminCategoryGroupDTO adminCategoryGroupDTO)
+        {
+            return new CategoryGroup()
+            {
+                ID = adminCategoryGroupDTO.id,
+                Name = adminCategoryGroupDTO.name
+            };
+        }
+	}
 }

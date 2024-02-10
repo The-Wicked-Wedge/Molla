@@ -1,76 +1,43 @@
-﻿<main class="main">
+﻿@model Molla.Application.DTOs.SiteSide.HomeIndexDTO
+
+<main class="main">
     <div class="container">
         <div class="intro-slider-container slider-container-ratio mb-2">
             <div class="intro-slider owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl"
                  data-owl-options='{"nav": false, "rtl": true}'>
-                <div class="intro-slide">
-                    <figure class="slide-image">
-                        <picture>
-                            <source media="(max-width: 480px)"
-                                    srcset="/SiteSide/assets/images/demos/demo-10/slider/slide-1-480w.jpg">
-                            <img src="/SiteSide/assets/images/demos/demo-10/slider/slide-1.jpg" alt="Image Desc">
-                        </picture>
-                    </figure><!-- End .slide-image -->
+                
+                @foreach(var slide in Model.Slider)
+                {
+                    <div class="intro-slide">
+                        <figure class="slide-image">
 
-                    <div class="intro-content">
-                        <h3 class="intro-subtitle">پیشنهاد های جدید</h3><!-- End .h3 intro-subtitle -->
-                        <h1 class="intro-title text-white">کفش و کفش ورزشی</h1>
-                        <!-- End .intro-title -->
+                            <picture>
+                                <source media="(max-width: 480px)"
+                                        srcset="@slide.ImageSource">
+                                <img src="@slide.ImageSource" alt="Image Desc">
+                            </picture>
+                        </figure><!-- End .slide-image -->
 
-                        <div class="intro-price text-white">از 90,000 تومان</div><!-- End .intro-price -->
+                        <div class="intro-content">
+                            <h3 class="intro-subtitle">@slide.Title</h3><!-- End .h3 intro-subtitle -->
+                            <h1 class="intro-title text-white">@slide.Description</h1>
+                            <!-- End .intro-title -->
 
-                        <a href="category.html" class="btn btn-white-primary btn-round">
-                            <span>خرید</span>
-                            <i class="icon-long-arrow-left"></i>
-                        </a>
-                    </div><!-- End .intro-content -->
-                </div><!-- End .intro-slide -->
+                            <div class="intro-price text-white">@slide.Tag</div><!-- End .intro-price -->
 
-                <div class="intro-slide">
-                    <figure class="slide-image">
-                        <picture>
-                            <source media="(max-width: 480px)"
-                                    srcset="/SiteSide/assets/images/demos/demo-10/slider/slide-2-480w.jpg">
-                            <img src="/SiteSide/assets/images/demos/demo-10/slider/slide-2.jpg" alt="Image Desc">
-                        </picture>
-                    </figure><!-- End .slide-image -->
+                            <a href=@slide.Link class="btn btn-white-primary btn-round">
+                                <span>خرید</span>
+                                <i class="icon-long-arrow-left"></i>
+                            </a>
+                        </div><!-- End .intro-content -->
+                    </div>
 
-                    <div class="intro-content">
-                        <h3 class="intro-subtitle">محصولات جدید</h3><!-- End .h3 intro-subtitle -->
-                        <h1 class="intro-title text-white">این هفته با بیشترین تخفیف</h1>
-                        <!-- End .intro-title -->
+                    <!-- End .intro-slide -->
+                }
 
-                        <div class="intro-price text-white">از 49,000 تومان</div><!-- End .intro-price -->
+                
 
-                        <a href="category.html" class="btn btn-white-primary btn-round">
-                            <span>خرید</span>
-                            <i class="icon-long-arrow-left"></i>
-                        </a>
-                    </div><!-- End .intro-content -->
-                </div><!-- End .intro-slide -->
-
-                <div class="intro-slide">
-                    <figure class="slide-image">
-                        <picture>
-                            <source media="(max-width: 480px)"
-                                    srcset="/SiteSide/assets/images/demos/demo-10/slider/slide-3-480w.jpg">
-                            <img src="/SiteSide/assets/images/demos/demo-10/slider/slide-3.jpg" alt="Image Desc">
-                        </picture>
-                    </figure><!-- End .slide-image -->
-
-                    <div class="intro-content">
-                        <h3 class="intro-subtitle text-white">پیشنهاد ها و تخفیف های جدید</h3>
-                        <!-- End .h3 intro-subtitle -->
-                        <h1 class="intro-title text-white">از دست ندهید : </h1><!-- End .intro-title -->
-
-                        <div class="intro-price text-white">بالای 60% تخفیف</div><!-- End .intro-price -->
-
-                        <a href="category.html" class="btn btn-white-primary btn-round">
-                            <span>خرید</span>
-                            <i class="icon-long-arrow-left"></i>
-                        </a>
-                    </div><!-- End .intro-content -->
-                </div><!-- End .intro-slide -->
+                
             </div><!-- End .intro-slider owl-carousel owl-simple -->
             <span class="slider-loader"></span><!-- End .slider-loader -->
         </div><!-- End .intro-slider-container -->

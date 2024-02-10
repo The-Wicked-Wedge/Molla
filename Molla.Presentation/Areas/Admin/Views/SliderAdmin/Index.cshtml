@@ -5,16 +5,18 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminTemplate.cshtml";
 }
 
-<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">اسلایدر جدید</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
@@ -35,9 +37,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
+                @Html.DisplayFor(modelItem => item.StartDate)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
@@ -47,13 +52,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.Events)
-                </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.ID  }) |
+                @Html.DisplayFor(modelItem => item.Events)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new {  id=item.ID  }) |
                     @* @Html.ActionLink("Details", "Details", new { id=item.ID }) | *@
-                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                    @Html.ActionLink("حذف", "Delete", new { id=item.ID })
             </td>
         </tr>
 }

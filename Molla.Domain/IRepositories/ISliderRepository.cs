@@ -10,7 +10,10 @@ namespace Molla.Domain.IRepositories
     public interface ISliderRepository
     {
         Task<Slider> GetByIDAsync(Guid id);
+        Task<Slider> GetByIDNoTrackingAsync(Guid id);
         Task<bool> IsAnyActiveSlider();
+
+        Task<List<Slider>> GetAllNoTrackingAsync();
 
         #region Generice Repository
         Task<IEnumerable<Slider>> GetAllAsync();

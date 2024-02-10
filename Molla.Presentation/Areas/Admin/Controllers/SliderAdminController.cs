@@ -29,6 +29,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SliderDTO model)
         {
+            ModelState.Remove("ImageSource");
             try
             {
                 if (!ModelState.IsValid)
@@ -59,10 +60,12 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         {
             try
             {
+                ModelState.Remove("ImageSource");
                 if (!ModelState.IsValid)
                 {
                     return Json("Error : " +"Model State Is Not Valid");
                 }
+
                 await _sliderService.UpdateByIDAsync(model);
 
                 return RedirectToAction("Index","SliderAdmin");
@@ -86,7 +89,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfig(Guid id)
         {
             await _sliderService.DeleteByIDAsync(id);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

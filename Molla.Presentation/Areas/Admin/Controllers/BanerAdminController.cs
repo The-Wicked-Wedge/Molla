@@ -30,9 +30,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         [Route("/Admin/Baner/Create")]
         public IActionResult Create()
         {
-            var reload = new BanerDTO();
-
-            return View(reload);
+            return View();
         }
         
         
@@ -42,7 +40,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         {
             try
             {
-
+                ModelState.Remove("ImageSource");
                 if (!ModelState.IsValid)
                 {
                     return Json("Error : ModelState Is Not Valid");
@@ -96,6 +94,7 @@ namespace Molla.Presentation.Areas.Admin.Controllers
         {
             try
             {
+                ModelState.Remove("ImageSource");
                 if (!ModelState.IsValid)
                 {
                     return Json("Error : Model State Is Not Valid");
@@ -123,7 +122,8 @@ namespace Molla.Presentation.Areas.Admin.Controllers
             {
                 await banerService.DeleteByIdAsync(Id);
 
-                return Json(true);
+                return RedirectToAction("Index");
+
             }catch(Exception ex)
             {
                 return Json("Error : "+ex.Message);

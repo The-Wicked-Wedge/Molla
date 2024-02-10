@@ -12,11 +12,22 @@ public class SliderRepository(ApplicationDbContext context) : GenericeRepository
         Slider sliderById = await _context.Sliders.FirstOrDefaultAsync(x => x.ID == id);
         return sliderById;
     }
+
+    public async Task<Slider> GetByIDNoTrackingAsync(Guid id)
+    {
+        Slider sliderById = await _context.Sliders.AsNoTracking().FirstOrDefaultAsync(x => x.ID == id);
+        return sliderById;
+    }
     public async Task<bool> IsAnyActiveSlider()
     {
         IEnumerable<Slider> allSliders = await GetAllAsync();
         bool isAnyActiveSlider = allSliders.Select(x => x.IsActive == true).Any();
         return isAnyActiveSlider;
+    }
+
+    public async Task<List<Slider>> GetAllNoTrackingAsync()
+    {
+        return await _context.Sliders.AsNoTracking().ToListAsync();
     }
 }
 

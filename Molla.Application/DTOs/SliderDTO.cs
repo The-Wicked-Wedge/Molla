@@ -20,43 +20,43 @@ namespace Molla.Application.DTOs
         public DateTime CreateDate { get; set; }
         [Display(Name = "Update date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}")]
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         public required string ImageSource { get; set; }
-        [Display(Name = "Start slider")]
+        [Display(Name = "نمایش از تاریخ و ساعت")]
         [Required(ErrorMessage = "please enter {0}")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "End slider")]
+        [Display(Name = "تا تاریخ و ساعت")]
         [Required(ErrorMessage = "please enter {0}")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:MM AM/PM}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "make it main slide of slider")]
+        [Display(Name = "اسلایدر اصلی")]
         [Required(ErrorMessage = "please enter {0}")]
         public bool IsActive { get; set; }
 
-        [Display(Name = "Title")]
+        [Display(Name = "عنوان")]
         [MaxLength(70, ErrorMessage = "BloggerName must be 10 characters or less"), MinLength(5)]
         [Required(ErrorMessage = "please enter {0}")]
         public required string Title { get; set; }
 
-        [Display(Name = "Short description")]
+        [Display(Name = "توضیح کوتاه (حداقل 10 کاراکتر)")]
         [DataType(DataType.MultilineText)]
         [MaxLength(150, ErrorMessage = "BloggerName must be 10 characters or less"), MinLength(10)]
         [Required(ErrorMessage = "please enter {0}")]
         public required string Description { get; set; }
 
-        [Display(Name = "Tags")]
+        [Display(Name = "تگ")]
         [Required(ErrorMessage = "please enter {0}")]
         public string Tag { get; set; }
 
-        [Display(Name = "Link to")]
+        [Display(Name = "پیوند")]
         [Required(ErrorMessage = "please enter {0}")]
         [Url(ErrorMessage = "Enter valid URL")]
         public string? Link { get; set; }
-        [Display(Name = "Events")]
+        [Display(Name = "وضعیت")]
         public ProductEvents? Events { get; set; }
 
         public IFormFile? ImageFile { get; set; }
